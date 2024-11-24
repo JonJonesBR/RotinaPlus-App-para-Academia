@@ -4,7 +4,9 @@ Bem-vindo ao RotinaPlus, um aplicativo desenvolvido para ajudar academias e prof
 
 🎯 Objetivo do Projeto
 
-O RotinaPlus foi criado para otimizar a gestão de treinos e facilitar a comunicação entre professores e alunos, promovendo um ambiente mais organizado e profissional. Com ele, você pode:
+O RotinaPlus foi criado para otimizar a gestão de treinos e facilitar a comunicação entre professores e alunos, promovendo um ambiente mais organizado e profissional. 
+
+Com ele, você pode:
 
 Criar e organizar treinos personalizados.
 
@@ -14,13 +16,13 @@ Compartilhar feedback e atualizações em tempo real.
 
 ✨ Funcionalidades
 
-Gerenciamento de treinos: Cadastro, edição e exclusão de rotinas de treino.
+Cadastro de alunos.
 
-Acompanhamento de progresso: Registro de métricas como peso, repetições e cargas.
+Gerenciamento de treinos: Edição e exclusão de rotinas de treino, com vinculação dos alunos.
 
-Comunicação direta: Canal para envio de mensagens e orientações aos alunos.
+Visualização de exercícios com pesquisa integrada de vídeos do youtube.
 
-Relatórios detalhados: Gráficos e estatísticas sobre o desempenho dos alunos.
+Função Bônus: Organizador de Refeições com contagem de calorias e planejamento alimentar
 
 🛠️ Tecnologias Utilizadas
 
@@ -28,4 +30,4 @@ O projeto utiliza as seguintes tecnologias:
 
 Frontend: React Native para o desenvolvimento do aplicativo móvel.
 
-Backend: Node.js com Express para APIs.
+Backend: Node.js.
