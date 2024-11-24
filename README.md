@@ -30,4 +30,4 @@ O projeto utiliza as seguintes tecnologias:
 
 Frontend: React Native para o desenvolvimento do aplicativo móvel.
 
-Backend: Node.js.
+Backend: Node.js
