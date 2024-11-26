@@ -29,20 +29,20 @@ export default function WelcomeScreen({ navigation }) {
 
       <Button
         mode="contained"
-        icon="food"
-        onPress={() => navigation.navigate('FoodLog')}
-        style={styles.button}
-      >
-        Registro de Alimentos
-      </Button>
-
-      <Button
-        mode="contained"
         icon="youtube"
         onPress={() => navigation.navigate('YouTube')}
         style={styles.button}
       >
         Vídeos de Exercícios
+      </Button>
+
+      <Button
+        mode="contained"
+        icon="assessment"
+        onPress={() => navigation.navigate('ProgressTracking')}
+        style={styles.button}
+      >
+        Acompanhamento de Progresso
       </Button>
     </View>
   );

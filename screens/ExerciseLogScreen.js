@@ -69,6 +69,10 @@ export default function ExerciseLogScreen() {
       Alert.alert('Erro', 'O nome da série não pode estar vazio.');
       return;
     }
+    if (customPlans.some(plan => plan.name === newPlanName)) {
+      Alert.alert('Erro', 'O nome da série já existe.');
+      return;
+    }
     const newPlan = { id: Date.now().toString(), name: newPlanName, exercises: [] };
     const updatedPlans = [...customPlans, newPlan];
     savePlans(updatedPlans);
@@ -84,6 +88,7 @@ export default function ExerciseLogScreen() {
       'Plano Vinculado',
       `Plano "${selectedPlan.name}" vinculado ao aluno "${selectedStudent.name}".`
     );
+    // Aqui você pode adicionar a lógica para salvar a vinculação no AsyncStorage ou em um servidor
   };
 
   return (

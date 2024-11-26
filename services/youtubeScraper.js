@@ -1,7 +1,17 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
 
+/**
+ * Função para buscar vídeos do YouTube usando scraping.
+ * @param {string} query - Termo de busca.
+ * @returns {Promise<Array>} - Lista de vídeos encontrados.
+ */
 export async function searchYouTubeVideosScraper(query) {
+  if (!query) {
+    console.error('Erro: A consulta de pesquisa não pode estar vazia.');
+    return [];
+  }
+
   try {
     // Faz a requisição para a página de resultados do YouTube
     const response = await axios.get(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`);
