@@ -13,7 +13,11 @@ export default function StudentForm({ route, navigation }) {
     weight: student?.weight || '',
     height: student?.height || '',
     notes: student?.notes || '',
-    progress: student?.progress || { q1: 0, q2: 0, q3: 0, q4: 0 },
+    financialInfo: student?.financialInfo || {
+      monthlyFee: '',
+      paymentMethod: '',
+      paymentStatus: '',
+    },
   });
 
   const handleSave = async () => {
@@ -87,35 +91,25 @@ export default function StudentForm({ route, navigation }) {
             style={styles.input}
           />
           <TextInput
-            label="Progresso Q1"
-            value={formData.progress.q1.toString()}
-            onChangeText={(text) => setFormData({ ...formData, progress: { ...formData.progress, q1: parseInt(text) } })}
+            label="Mensalidade (R$)"
+            value={formData.financialInfo.monthlyFee.toString()}
+            onChangeText={(text) => setFormData({ ...formData, financialInfo: { ...formData.financialInfo, monthlyFee: parseFloat(text) } })}
             mode="outlined"
             keyboardType="numeric"
             style={styles.input}
           />
           <TextInput
-            label="Progresso Q2"
-            value={formData.progress.q2.toString()}
-            onChangeText={(text) => setFormData({ ...formData, progress: { ...formData.progress, q2: parseInt(text) } })}
+            label="Método de Pagamento"
+            value={formData.financialInfo.paymentMethod}
+            onChangeText={(text) => setFormData({ ...formData, financialInfo: { ...formData.financialInfo, paymentMethod: text } })}
             mode="outlined"
-            keyboardType="numeric"
             style={styles.input}
           />
           <TextInput
-            label="Progresso Q3"
-            value={formData.progress.q3.toString()}
-            onChangeText={(text) => setFormData({ ...formData, progress: { ...formData.progress, q3: parseInt(text) } })}
+            label="Status do Pagamento"
+            value={formData.financialInfo.paymentStatus}
+            onChangeText={(text) => setFormData({ ...formData, financialInfo: { ...formData.financialInfo, paymentStatus: text } })}
             mode="outlined"
-            keyboardType="numeric"
-            style={styles.input}
-          />
-          <TextInput
-            label="Progresso Q4"
-            value={formData.progress.q4.toString()}
-            onChangeText={(text) => setFormData({ ...formData, progress: { ...formData.progress, q4: parseInt(text) } })}
-            mode="outlined"
-            keyboardType="numeric"
             style={styles.input}
           />
           <Button mode="contained" onPress={handleSave} style={styles.saveButton}>

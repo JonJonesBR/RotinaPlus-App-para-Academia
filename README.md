@@ -28,13 +28,13 @@ O projeto utiliza as seguintes tecnologias:
 
 ## 💻 Instalação e Configuração
 
-### Pré-requisitos
+## Pré-requisitos
 
 - Node.js
 - npm ou yarn
 - React Native CLI
 
-### Passos para Instalação
+## Passos para Instalação
 
 1. **Clone o repositório**:
    ```bash
@@ -58,10 +58,8 @@ npm install
 npm start
 
 
-### Uso
+## Uso
 Adicione uma seção para descrever como usar o aplicativo:
-```markdown
-## 📱 Uso
 
 1. **Cadastro de Alunos**:
    - Navegue até a tela de cadastro de alunos e preencha os campos necessários.

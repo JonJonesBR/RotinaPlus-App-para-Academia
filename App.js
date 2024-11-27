@@ -5,8 +5,8 @@ import WelcomeScreen from './screens/WelcomeScreen';
 import StudentForm from './screens/StudentForm';
 import StudentListScreen from './screens/StudentListScreen';
 import ExerciseLogScreen from './screens/ExerciseLogScreen';
-import YouTubeScreen from './screens/YouTubeScreen';
-import ProgressTrackingScreen from './screens/ProgressTrackingScreen';
+import StudentManagementScreen from './screens/StudentManagementScreen';
+import FinancialManagementScreen from './screens/FinancialManagementScreen'; // Nova tela
 
 const Stack = createStackNavigator();
 
@@ -34,15 +34,15 @@ export default function App() {
           component={ExerciseLogScreen}
           options={{ title: 'Registro de Exercícios' }}
         />
-        <Stack.Screen
-          name="ProgressTracking"
-          component={ProgressTrackingScreen}
-          options={{ title: 'Acompanhamento de Progresso' }}
+       <Stack.Screen
+          name="StudentManagement"
+          component={StudentManagementScreen}
+          options={{ title: 'Gerenciar Alunos Cadastrados' }}
         />
         <Stack.Screen
-          name="YouTube"
-          component={YouTubeScreen}
-          options={{ title: 'Vídeos do YouTube' }}
+          name="FinancialManagement"
+          component={FinancialManagementScreen}
+          options={{ title: 'Gerenciamento Financeiro' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

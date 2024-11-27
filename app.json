@@ -36,10 +36,12 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
+
+    "newArchEnabled": true
+    },
     "notifications": {
       "icon": "./assets/notification-icon.png",
       "color": "#FFFFFF",
       "androidMode": "default"
     }
   }
-}

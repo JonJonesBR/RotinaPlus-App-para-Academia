@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { globalStyles } from '../styles/globalStyles';
 
 export default function WelcomeScreen({ navigation }) {
@@ -29,20 +29,20 @@ export default function WelcomeScreen({ navigation }) {
 
       <Button
         mode="contained"
-        icon="youtube"
-        onPress={() => navigation.navigate('YouTube')}
+        icon="account-edit"
+        onPress={() => navigation.navigate('StudentManagement')}
         style={styles.button}
       >
-        Vídeos de Exercícios
+        Gerenciar Alunos Cadastrados
       </Button>
 
       <Button
         mode="contained"
-        icon="assessment"
-        onPress={() => navigation.navigate('ProgressTracking')}
+        icon="cash"
+        onPress={() => navigation.navigate('FinancialManagement')}
         style={styles.button}
       >
-        Acompanhamento de Progresso
+        Gerenciamento Financeiro
       </Button>
     </View>
   );

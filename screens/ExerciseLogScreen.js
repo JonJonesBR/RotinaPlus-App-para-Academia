@@ -1,21 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  FlatList,
-  TextInput,
-  StyleSheet,
-  Alert,
-} from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, TextInput, StyleSheet, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const predefinedPlans = [
-  { id: '1', name: 'Perda de Peso' },
-  { id: '2', name: 'Ganho de Massa' },
-  { id: '3', name: 'Resistência' },
-  { id: '4', name: 'Teste de Aptidão Física' },
-];
 
 export default function ExerciseLogScreen() {
   const [selectedStudent, setSelectedStudent] = useState(null);
@@ -29,7 +14,6 @@ export default function ExerciseLogScreen() {
     loadPlans();
   }, []);
 
-  // Carregar alunos do AsyncStorage
   const loadStudents = async () => {
     try {
       const storedStudents = await AsyncStorage.getItem('@students');
@@ -43,7 +27,6 @@ export default function ExerciseLogScreen() {
     }
   };
 
-  // Carregar séries personalizadas do AsyncStorage
   const loadPlans = async () => {
     try {
       const storedPlans = await AsyncStorage.getItem('@customPlans');
@@ -69,33 +52,35 @@ export default function ExerciseLogScreen() {
       Alert.alert('Erro', 'O nome da série não pode estar vazio.');
       return;
     }
-    if (customPlans.some(plan => plan.name === newPlanName)) {
-      Alert.alert('Erro', 'O nome da série já existe.');
-      return;
-    }
     const newPlan = { id: Date.now().toString(), name: newPlanName, exercises: [] };
     const updatedPlans = [...customPlans, newPlan];
     savePlans(updatedPlans);
     setNewPlanName('');
   };
 
-  const linkPlanToStudent = () => {
+  const linkPlanToStudent = async () => {
     if (!selectedStudent || !selectedPlan) {
       Alert.alert('Erro', 'Selecione um aluno e uma série de exercícios.');
       return;
     }
-    Alert.alert(
-      'Plano Vinculado',
-      `Plano "${selectedPlan.name}" vinculado ao aluno "${selectedStudent.name}".`
-    );
-    // Aqui você pode adicionar a lógica para salvar a vinculação no AsyncStorage ou em um servidor
+    const updatedStudents = students.map((student) => {
+      if (student.id === selectedStudent.id) {
+        return {
+          ...student,
+          linkedPlan: selectedPlan,
+        };
+      }
+      return student;
+    });
+    await AsyncStorage.setItem('@students', JSON.stringify(updatedStudents));
+    setStudents(updatedStudents);
+    Alert.alert('Plano Vinculado', `Plano "${selectedPlan.name}" vinculado ao aluno "${selectedStudent.name}".`);
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Registro de Exercícios</Text>
 
-      {/* Seletor de aluno */}
       <Text style={styles.subtitle}>Selecione o Aluno:</Text>
       {students.length > 0 ? (
         <FlatList
@@ -118,10 +103,9 @@ export default function ExerciseLogScreen() {
         <Text style={styles.noDataText}>Nenhum aluno cadastrado.</Text>
       )}
 
-      {/* Seletor de série */}
       <Text style={styles.subtitle}>Séries de Exercícios:</Text>
       <FlatList
-        data={[...customPlans, ...predefinedPlans]}
+        data={[...customPlans]}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <TouchableOpacity
@@ -136,7 +120,6 @@ export default function ExerciseLogScreen() {
         )}
       />
 
-      {/* Adicionar nova série personalizada */}
       <TextInput
         style={styles.input}
         placeholder="Nome da nova série"
@@ -147,7 +130,6 @@ export default function ExerciseLogScreen() {
         <Text style={styles.buttonText}>Adicionar Série</Text>
       </TouchableOpacity>
 
-      {/* Vincular série ao aluno */}
       <TouchableOpacity style={styles.linkButton} onPress={linkPlanToStudent}>
         <Text style={styles.buttonText}>Vincular Série ao Aluno</Text>
       </TouchableOpacity>
