@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
-import { Text, TextInput, Button } from 'react-native-paper';
+import { View, StyleSheet, ScrollView, KeyboardAvoidingView, Platform, Text } from 'react-native';
+import { TextInput, Button, Checkbox } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function StudentForm({ route, navigation }) {
@@ -13,11 +13,7 @@ export default function StudentForm({ route, navigation }) {
     weight: student?.weight || '',
     height: student?.height || '',
     notes: student?.notes || '',
-    financialInfo: student?.financialInfo || {
-      monthlyFee: '',
-      paymentMethod: '',
-      paymentStatus: '',
-    },
+    frequencyDays: student?.frequencyDays || [], // Novo campo: Dias de Frequência
   });
 
   const handleSave = async () => {
@@ -34,6 +30,15 @@ export default function StudentForm({ route, navigation }) {
     } catch (error) {
       console.error('Erro ao salvar aluno:', error);
     }
+  };
+
+  const toggleDay = (day) => {
+    setFormData((prev) => {
+      const days = prev.frequencyDays.includes(day)
+        ? prev.frequencyDays.filter((d) => d !== day)
+        : [...prev.frequencyDays, day];
+      return { ...prev, frequencyDays: days };
+    });
   };
 
   return (
@@ -83,35 +88,26 @@ export default function StudentForm({ route, navigation }) {
             style={styles.input}
           />
           <TextInput
-            label="Observações"
+            label="Observações e Objetivos"
             value={formData.notes}
             onChangeText={(text) => setFormData({ ...formData, notes: text })}
             mode="outlined"
             multiline
             style={styles.input}
           />
-          <TextInput
-            label="Mensalidade (R$)"
-            value={formData.financialInfo.monthlyFee.toString()}
-            onChangeText={(text) => setFormData({ ...formData, financialInfo: { ...formData.financialInfo, monthlyFee: parseFloat(text) } })}
-            mode="outlined"
-            keyboardType="numeric"
-            style={styles.input}
-          />
-          <TextInput
-            label="Método de Pagamento"
-            value={formData.financialInfo.paymentMethod}
-            onChangeText={(text) => setFormData({ ...formData, financialInfo: { ...formData.financialInfo, paymentMethod: text } })}
-            mode="outlined"
-            style={styles.input}
-          />
-          <TextInput
-            label="Status do Pagamento"
-            value={formData.financialInfo.paymentStatus}
-            onChangeText={(text) => setFormData({ ...formData, financialInfo: { ...formData.financialInfo, paymentStatus: text } })}
-            mode="outlined"
-            style={styles.input}
-          />
+
+          <Text style={styles.sectionTitle}>Dias de Frequência</Text>
+          <View style={styles.frequencyContainer}>
+            {[1, 2, 3, 4, 5, 6, 7].map((day) => (
+              <Checkbox.Item
+                key={day}
+                label={`Dia ${day}`}
+                status={formData.frequencyDays.includes(day) ? 'checked' : 'unchecked'}
+                onPress={() => toggleDay(day)}
+              />
+            ))}
+          </View>
+
           <Button mode="contained" onPress={handleSave} style={styles.saveButton}>
             Salvar
           </Button>
@@ -134,6 +130,15 @@ const styles = StyleSheet.create({
   },
   input: {
     marginBottom: 15,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  frequencyContainer: {
+    marginBottom: 20,
   },
   saveButton: {
     marginTop: 20,

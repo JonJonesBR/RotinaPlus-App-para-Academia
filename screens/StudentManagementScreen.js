@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function StudentManagementScreen({ navigation }) {
   const [students, setStudents] = useState([]);
 
+  // Carregar dados ao focar na tela
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       loadStudents();
@@ -17,7 +18,10 @@ export default function StudentManagementScreen({ navigation }) {
     try {
       const storedStudents = await AsyncStorage.getItem('@students');
       if (storedStudents) {
-        setStudents(JSON.parse(storedStudents));
+        const sortedStudents = JSON.parse(storedStudents).sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
+        setStudents(sortedStudents);
       }
     } catch (error) {
       console.error('Erro ao carregar alunos:', error);
@@ -42,21 +46,6 @@ export default function StudentManagementScreen({ navigation }) {
     ]);
   };
 
-  const handleUnlinkPlan = async (studentId) => {
-    const updatedStudents = students.map((student) => {
-      if (student.id === studentId) {
-        return {
-          ...student,
-          linkedPlan: null,
-        };
-      }
-      return student;
-    });
-    await AsyncStorage.setItem('@students', JSON.stringify(updatedStudents));
-    setStudents(updatedStudents);
-    Alert.alert('Plano Desvinculado', 'Plano desvinculado do aluno com sucesso.');
-  };
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Gerenciar Alunos Cadastrados</Text>
@@ -65,28 +54,53 @@ export default function StudentManagementScreen({ navigation }) {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.listItem}>
-            <Text style={styles.listText}>
-              {item.name} - {item.cpf}
-            </Text>
+            <View style={styles.infoContainer}>
+              <Text style={styles.listText}>{item.name} - {item.cpf}</Text>
+              <Text style={styles.detailsText}>Idade: {item.age}</Text>
+              <Text style={styles.detailsText}>Peso: {item.weight} kg</Text>
+              <Text style={styles.detailsText}>Altura: {item.height} cm</Text>
+              <Text style={styles.detailsText}>Observações: {item.notes || 'Nenhuma'}</Text>
+              {item.linkedPlan ? (
+                <>
+                  <Text style={styles.detailsText}>
+                    Plano Vinculado: {item.linkedPlan.name}
+                  </Text>
+                  <Text style={styles.detailsText}>
+                    Séries: {item.linkedPlan.sets}, Repetições: {item.linkedPlan.reps}
+                  </Text>
+                </>
+              ) : (
+                <Text style={styles.detailsText}>Nenhum plano vinculado</Text>
+              )}
+            </View>
             <View style={styles.actions}>
+              {/* Botão para Editar */}
               <Button
-                onPress={() => navigation.navigate('StudentForm', { student: item })}
+                mode="text"
+                onPress={() => navigation.navigate('StudentRegistration', { student: item })}
+                style={styles.editButton}
               >
                 Editar
               </Button>
-              <Button onPress={() => handleDelete(item.id)} color="red">
+
+              {/* Botão para Excluir */}
+              <Button
+                mode="text"
+                onPress={() => handleDelete(item.id)}
+                color="red"
+                style={styles.deleteButton}
+              >
                 Excluir
               </Button>
-              {item.linkedPlan && (
-                <Button onPress={() => handleUnlinkPlan(item.id)} color="orange">
-                  Desvincular Plano
-                </Button>
-              )}
             </View>
           </View>
         )}
       />
-      <Button mode="contained" onPress={() => navigation.navigate('StudentForm')} style={styles.addButton}>
+      <Button
+        mode="contained"
+        onPress={() => navigation.navigate('StudentRegistration')}
+        style={styles.addButton}
+      >
         Adicionar Novo Aluno
       </Button>
     </View>
@@ -108,13 +122,33 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+  },
+  infoContainer: {
+    flex: 2,
   },
   listText: {
     fontSize: 18,
+    fontWeight: 'bold',
+  },
+  detailsText: {
+    fontSize: 14,
+    color: '#555',
+    marginVertical: 2,
   },
   actions: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  editButton: {
+    marginRight: 10,
+  },
+  deleteButton: {
+    marginRight: 10,
   },
   addButton: {
     marginTop: 20,

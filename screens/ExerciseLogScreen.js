@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, FlatList, TextInput, StyleSheet, Alert } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function ExerciseLogScreen() {
+export default function ExerciseLogScreen({ navigation }) {
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [students, setStudents] = useState([]);
-  const [selectedPlan, setSelectedPlan] = useState(null);
   const [customPlans, setCustomPlans] = useState([]);
-  const [newPlanName, setNewPlanName] = useState('');
 
   useEffect(() => {
     loadStudents();
     loadPlans();
-  }, []);
+
+    // Listener para recarregar planos ao voltar para a tela
+    const unsubscribe = navigation.addListener('focus', () => {
+      loadPlans();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   const loadStudents = async () => {
     try {
       const storedStudents = await AsyncStorage.getItem('@students');
       if (storedStudents) {
         setStudents(JSON.parse(storedStudents));
-      } else {
-        setStudents([]);
       }
     } catch (error) {
       console.error('Erro ao carregar alunos:', error);
@@ -38,101 +42,104 @@ export default function ExerciseLogScreen() {
     }
   };
 
-  const savePlans = async (updatedPlans) => {
-    try {
-      await AsyncStorage.setItem('@customPlans', JSON.stringify(updatedPlans));
-      setCustomPlans(updatedPlans);
-    } catch (error) {
-      console.error('Erro ao salvar planos:', error);
-    }
+  const handleDeletePlan = (planId) => {
+    Alert.alert('Confirmação', 'Deseja excluir esta série?', [
+      {
+        text: 'Cancelar',
+        style: 'cancel',
+      },
+      {
+        text: 'Excluir',
+        style: 'destructive',
+        onPress: async () => {
+          const updatedPlans = customPlans.filter((plan) => plan.id !== planId);
+          await AsyncStorage.setItem('@customPlans', JSON.stringify(updatedPlans));
+          setCustomPlans(updatedPlans);
+        },
+      },
+    ]);
   };
 
-  const addCustomPlan = () => {
-    if (!newPlanName.trim()) {
-      Alert.alert('Erro', 'O nome da série não pode estar vazio.');
+  const handleLinkPlan = (plan) => {
+    if (!selectedStudent) {
+      Alert.alert('Erro', 'Nenhum aluno foi selecionado.');
       return;
     }
-    const newPlan = { id: Date.now().toString(), name: newPlanName, exercises: [] };
-    const updatedPlans = [...customPlans, newPlan];
-    savePlans(updatedPlans);
-    setNewPlanName('');
-  };
-
-  const linkPlanToStudent = async () => {
-    if (!selectedStudent || !selectedPlan) {
-      Alert.alert('Erro', 'Selecione um aluno e uma série de exercícios.');
-      return;
-    }
-    const updatedStudents = students.map((student) => {
-      if (student.id === selectedStudent.id) {
-        return {
-          ...student,
-          linkedPlan: selectedPlan,
-        };
-      }
-      return student;
+    navigation.navigate('ConfirmSeries', {
+      series: plan,
+      student: selectedStudent,
     });
-    await AsyncStorage.setItem('@students', JSON.stringify(updatedStudents));
-    setStudents(updatedStudents);
-    Alert.alert('Plano Vinculado', `Plano "${selectedPlan.name}" vinculado ao aluno "${selectedStudent.name}".`);
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Registro de Exercícios</Text>
 
-      <Text style={styles.subtitle}>Selecione o Aluno:</Text>
-      {students.length > 0 ? (
-        <FlatList
-          data={students}
-          keyExtractor={(item) => item.id}
-          horizontal
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={[
-                styles.studentButton,
-                selectedStudent?.id === item.id && styles.selectedButton,
-              ]}
-              onPress={() => setSelectedStudent(item)}
-            >
-              <Text style={styles.buttonText}>{item.name}</Text>
-            </TouchableOpacity>
-          )}
-        />
-      ) : (
-        <Text style={styles.noDataText}>Nenhum aluno cadastrado.</Text>
-      )}
-
-      <Text style={styles.subtitle}>Séries de Exercícios:</Text>
+      <Text style={styles.subtitle}>Selecione um Aluno:</Text>
       <FlatList
-        data={[...customPlans]}
+        data={students}
         keyExtractor={(item) => item.id}
+        horizontal
         renderItem={({ item }) => (
           <TouchableOpacity
             style={[
-              styles.planButton,
-              selectedPlan?.id === item.id && styles.selectedButton,
+              styles.studentButton,
+              selectedStudent?.id === item.id && styles.selectedButton,
             ]}
-            onPress={() => setSelectedPlan(item)}
+            onPress={() => setSelectedStudent(item)}
           >
-            <Text style={styles.buttonText}>{item.name}</Text>
+            <Text style={styles.studentName}>{item.name}</Text>
           </TouchableOpacity>
         )}
       />
+      {selectedStudent && (
+        <Text style={styles.selectedText}>
+          Aluno Selecionado: {selectedStudent.name}
+        </Text>
+      )}
 
-      <TextInput
-        style={styles.input}
-        placeholder="Nome da nova série"
-        value={newPlanName}
-        onChangeText={setNewPlanName}
+      <Text style={styles.subtitle}>Gerenciar Séries de Exercícios:</Text>
+      <FlatList
+        data={customPlans}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View style={styles.planItem}>
+            <Text style={styles.planName}>{item.name}</Text>
+            <View style={styles.planActions}>
+              <Button
+                mode="text"
+                onPress={() =>
+                  navigation.navigate('SeriesForm', { series: item })
+                }
+              >
+                Editar
+              </Button>
+              <Button
+                mode="text"
+                onPress={() => handleDeletePlan(item.id)}
+                color="red"
+              >
+                Excluir
+              </Button>
+              <Button
+                mode="text"
+                onPress={() => handleLinkPlan(item)}
+                color="blue"
+              >
+                Vincular
+              </Button>
+            </View>
+          </View>
+        )}
       />
-      <TouchableOpacity style={styles.addButton} onPress={addCustomPlan}>
-        <Text style={styles.buttonText}>Adicionar Série</Text>
-      </TouchableOpacity>
 
-      <TouchableOpacity style={styles.linkButton} onPress={linkPlanToStudent}>
-        <Text style={styles.buttonText}>Vincular Série ao Aluno</Text>
-      </TouchableOpacity>
+      <Button
+        mode="contained"
+        onPress={() => navigation.navigate('SeriesForm')}
+        style={styles.addButton}
+      >
+        Adicionar Nova Série
+      </Button>
     </View>
   );
 }
@@ -147,42 +154,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#ddd',
     borderRadius: 5,
   },
-  selectedButton: {
-    backgroundColor: '#6C63FF',
-  },
-  planButton: {
+  selectedButton: { backgroundColor: '#6C63FF' },
+  studentName: { color: '#fff', fontWeight: 'bold' },
+  selectedText: { marginTop: 10, fontSize: 16, fontWeight: 'bold' },
+  planItem: {
     padding: 10,
     marginVertical: 5,
-    backgroundColor: '#ddd',
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  noDataText: {
-    fontSize: 16,
-    color: 'gray',
-    marginVertical: 10,
-  },
-  input: {
     borderWidth: 1,
     borderColor: '#ddd',
-    padding: 10,
-    marginVertical: 10,
     borderRadius: 5,
+  },
+  planName: { fontSize: 16, fontWeight: 'bold' },
+  planActions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
   },
   addButton: {
-    backgroundColor: '#28a745',
-    padding: 10,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  linkButton: {
-    backgroundColor: '#007bff',
-    padding: 15,
-    borderRadius: 5,
-    alignItems: 'center',
     marginTop: 20,
   },
 });
