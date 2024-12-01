@@ -6,64 +6,57 @@ import StudentForm from './screens/StudentForm';
 import StudentListScreen from './screens/StudentListScreen';
 import ExerciseLogScreen from './screens/ExerciseLogScreen';
 import StudentManagementScreen from './screens/StudentManagementScreen';
-import FinancialManagementScreen from './screens/FinancialManagementScreen';
-import SeriesFormScreen from './screens/SeriesFormScreen'; // Tela para cadastro/edição de séries
-import ConfirmSeriesScreen from './screens/ConfirmSeriesScreen'; // Tela para confirmação de série
-import StudentDetailsScreen from './screens/StudentDetailsScreen'; // Nova tela para detalhes do aluno
+import SeriesFormScreen from './screens/SeriesFormScreen';
+import ConfirmSeriesScreen from './screens/ConfirmSeriesScreen';
+import StudentDetailsScreen from './screens/StudentDetailsScreen';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Welcome">
-        {/* Tela de Boas-vindas */}
+      <Stack.Navigator initialRouteName="WelcomeScreen">
         <Stack.Screen
-          name="Welcome"
+          name="WelcomeScreen"
           component={WelcomeScreen}
-          options={{ title: 'Bem-vindo' }}
+          options={{ headerShown: false }}
         />
-
-        {/* Cadastro de Alunos */}
         <Stack.Screen
           name="StudentRegistration"
           component={StudentForm}
           options={{ title: 'Cadastro de Aluno' }}
         />
-
-        {/* Lista de Alunos */}
         <Stack.Screen
           name="StudentList"
           component={StudentListScreen}
           options={{ title: 'Lista de Alunos' }}
         />
-
-        {/* Registro de Exercícios */}
         <Stack.Screen
           name="ExerciseLog"
           component={ExerciseLogScreen}
           options={{ title: 'Registro de Exercícios' }}
         />
-
-        {/* Gerenciar Alunos Cadastrados */}
         <Stack.Screen
           name="StudentManagement"
           component={StudentManagementScreen}
-          options={{ title: 'Gerenciar Alunos Cadastrados' }}
+          options={({ navigation }) => ({
+            title: 'Gerenciar Alunos',
+            headerLeft: () => (
+              <Icon
+                name="home"
+                size={24}
+                color="#000"
+                style={{ marginLeft: 15 }}
+                onPress={() => navigation.navigate('WelcomeScreen')}
+              />
+            ),
+          })}
         />
-
-        {/* Detalhes do Aluno */}
         <Stack.Screen
           name="StudentDetails"
           component={StudentDetailsScreen}
           options={{ title: 'Detalhes do Aluno' }}
-        />
-
-        {/* Gerenciamento Financeiro */}
-        <Stack.Screen
-          name="FinancialManagement"
-          component={FinancialManagementScreen}
-          options={{ title: 'Gerenciamento Financeiro' }}
         />
         <Stack.Screen
           name="SeriesForm"

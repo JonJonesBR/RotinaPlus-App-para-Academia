@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Modal, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { globalStyles } from '../styles/globalStyles';
 
 export default function WelcomeScreen({ navigation }) {
@@ -30,15 +29,6 @@ export default function WelcomeScreen({ navigation }) {
         style={styles.button}
       >
         Registro de Exercícios
-      </Button>
-
-      <Button
-        mode="contained"
-        icon="cash"
-        onPress={() => navigation.navigate('FinancialManagement')}
-        style={styles.button}
-      >
-        Gerenciamento Financeiro
       </Button>
 
       {/* Modal para opções de Cadastro de Alunos */}

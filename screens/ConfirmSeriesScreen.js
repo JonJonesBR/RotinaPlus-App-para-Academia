@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ConfirmSeriesScreen({ route, navigation }) {
   const { series, student } = route.params || {};
@@ -23,13 +24,53 @@ export default function ConfirmSeriesScreen({ route, navigation }) {
   const [sets, setSets] = React.useState(3);
   const [reps, setReps] = React.useState(10);
 
-  const handleConfirm = () => {
-    Alert.alert(
-      'Confirmação',
-      `A série "${series.name}" foi vinculada ao aluno "${student.name}" com ${sets} séries de ${reps} repetições.`,
-      [{ text: 'OK', onPress: () => navigation.goBack() }]
-    );
+  const handleConfirm = async () => {
+    try {
+      // Recuperar os alunos armazenados
+      const storedStudents = await AsyncStorage.getItem('@students');
+      const students = storedStudents ? JSON.parse(storedStudents) : [];
+  
+      // Atualizar o aluno com os exercícios vinculados
+      const updatedStudents = students.map((s) => {
+        if (s.id === student.id) {
+          const updatedExercises = s.linkedExercises || [];
+          return {
+            ...s,
+            linkedExercises: [
+              ...updatedExercises,
+              {
+                id: series.id,
+                name: series.name,
+                exercises: series.exercises,
+                sets,
+                reps,
+              },
+            ],
+          };
+        }
+        return s;
+      });
+  
+      // Salvar a lista de alunos atualizada
+      await AsyncStorage.setItem('@students', JSON.stringify(updatedStudents));
+  
+      // Redirecionar para a tela de boas-vindas
+      Alert.alert(
+        'Sucesso',
+        `A série "${series.name}" foi vinculada ao aluno "${student.name}".`,
+        [
+          {
+            text: 'OK',
+            onPress: () => navigation.navigate('WelcomeScreen'), // Redireciona para WelcomeScreen
+          },
+        ]
+      );
+    } catch (error) {
+      console.error('Erro ao vincular série:', error);
+      Alert.alert('Erro', 'Não foi possível vincular a série. Tente novamente.');
+    }
   };
+  
 
   return (
     <View style={styles.container}>

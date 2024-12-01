@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'; 
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -140,6 +140,15 @@ export default function ExerciseLogScreen({ navigation }) {
       >
         Adicionar Nova Série
       </Button>
+
+      {/* Botão "Não Incluir Exercícios" */}
+      <Button
+        mode="outlined"
+        onPress={() => navigation.navigate('WelcomeScreen')}
+        style={styles.noChangeButton}
+      >
+        Não Incluir Exercícios
+      </Button>
     </View>
   );
 }
@@ -172,5 +181,11 @@ const styles = StyleSheet.create({
   },
   addButton: {
     marginTop: 20,
+  },
+  noChangeButton: {
+    marginTop: 15,
+    borderColor: '#007bff',
+    borderWidth: 1,
+    borderRadius: 5,
   },
 });

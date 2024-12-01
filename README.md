@@ -1,89 +1,117 @@
-# RotinaPlus - App para Academia
+RotinaPlus - App para Academia
 
-Bem-vindo ao RotinaPlus, um aplicativo desenvolvido para ajudar academias e profissionais autônomos de educação física a gerenciar rotinas de treino, acompanhar o progresso dos alunos e oferecer um serviço mais eficiente e personalizado.
+Bem-vindo ao RotinaPlus, um aplicativo desenvolvido para facilitar a gestão de academias e otimizar o trabalho de profissionais autônomos de educação física. Com foco em organização e personalização, o RotinaPlus oferece ferramentas práticas para gerenciar alunos, treinos e informações de forma eficiente.
 
-## 🎯 Objetivo do Projeto
+🎯 Objetivo do Projeto
 
-O RotinaPlus foi criado para otimizar a gestão de treinos e facilitar a comunicação entre professores e alunos, promovendo um ambiente mais organizado e profissional.
+O RotinaPlus tem como objetivo principal otimizar o gerenciamento de treinos e a organização de informações relacionadas aos alunos, promovendo um ambiente mais organizado e funcional para academias e treinadores.
 
-Com ele, você pode:
+Com o aplicativo, é possível:
 
-- Criar e organizar treinos personalizados.
-- Monitorar o progresso dos alunos de maneira eficiente.
+Cadastrar e gerenciar alunos de forma detalhada.
+Criar, editar e vincular treinos personalizados aos alunos.
+Organizar dias de frequência e informações financeiras.
+Visualizar e gerenciar exercícios
+.
+✨ Funcionalidades
 
-**BÔNUS**: Visualizar vídeos de exercícios do Youtube sem sair do app.
+📋 Cadastro e Gerenciamento de Alunos
 
-## ✨ Funcionalidades
+Cadastro completo de informações pessoais: nome, CPF, idade, peso, altura e observações.
+Registro de frequência semanal.
+Informações financeiras, como mensalidade e vencimento.
+Edição e exclusão de dados dos alunos.
+Acesso a detalhes completos do aluno.
 
-- **Cadastro de alunos**.
-- **Gerenciamento de treinos**: Edição e exclusão de rotinas de treino, com vinculação dos alunos.
-- **Visualização de exercícios** com pesquisa integrada de vídeos do YouTube.
+🏋️ Gerenciamento de Exercícios e Séries
 
-## 🛠️ Tecnologias Utilizadas
+Criação de séries de exercícios personalizadas.
+Vinculação de séries aos alunos cadastrados.
+Edição e exclusão de séries de forma individual.
+Registro de número de séries, repetições e carga aplicada.
+Visualização dos dias de frequência relacionados aos exercícios vinculados.
 
-O projeto utiliza as seguintes tecnologias:
+🏠 Navegação Simplificada
 
-- **Frontend**: React Native para o desenvolvimento do aplicativo móvel.
-- **Backend**: Node.js.
+Tela inicial clara e intuitiva, com atalhos para gerenciamento de alunos e exercícios.
+Opção de retornar à tela inicial diretamente em qualquer funcionalidade.
 
-## 💻 Instalação e Configuração
+🚀 Funcionalidades Futuras
 
-## Pré-requisitos
+Planejamento de refeições e contagem de calorias (em desenvolvimento).
+Visualização integrada de vídeos de exercícios diretamente no app.
 
-- Node.js
-- npm ou yarn
-- React Native CLI
+🛠️ Tecnologias Utilizadas
 
-## Passos para Instalação
+Frontend: React Native.
+Gerenciamento de Dados: AsyncStorage para armazenamento local.
+Design: React Native Paper e Material Icons para componentes visuais.
 
-1. **Clone o repositório**:
-   ```bash
-   git clone https://github.com/JonJonesBR/RotinaPlus-App-para-Academia.git
-   cd RotinaPlus-App-para-Academia
+💻 Instalação e Configuração
 
-2. **Instale as dependências:**
+Pré-requisitos
+
+Node.js
+npm ou yarn
+React Native CLI configurado no ambiente.
+
+Passos para Instalação
+
+Clone o repositório:
+
+git clone https://github.com/JonJonesBR/RotinaPlus-App-para-Academia.git
+cd RotinaPlus-App-para-Academia
+
+Instale as dependências:
 
 npm install
 
-3. **Inicie o servidor de desenvolvimento:**
+Inicie o aplicativo:
 
 npx react-native run-android
-# ou
+
+ou para iOS
+
 npx react-native run-ios
 
-4. **Inicie o servidor backend:**
+📚 Uso
 
-cd backend
-npm install
-npm start
+Tela Inicial:
 
+Acesse as opções principais, como Gerenciar Alunos e Registro de Exercícios.
+Cadastro de Alunos:
 
-## Uso
-Adicione uma seção para descrever como usar o aplicativo:
+Registre os alunos preenchendo campos como nome, CPF, idade, altura, peso e dias de frequência.
+Gerenciamento de Treinos:
 
-1. **Cadastro de Alunos**:
-   - Navegue até a tela de cadastro de alunos e preencha os campos necessários.
+Crie séries de exercícios, configure séries e repetições, e vincule-as aos alunos.
+Exclusões e Ajustes:
 
-2. **Gerenciamento de Treinos**:
-   - Crie, edite e exclua rotinas de treino.
-   - Vincule alunos a rotinas específicas.
+Gerencie e exclua séries ou informações de alunos diretamente nas telas de gerenciamento.
+Navegação Intuitiva:
 
-3. **Visualização de Exercícios**:
-   - Pesquise e visualize vídeos de exercícios do YouTube.
+Retorne à tela inicial utilizando atalhos disponíveis em todas as telas.
 
-4. **Organizador de Refeições**:
-   - Planeje e monitore refeições com contagem de calorias.
+🤝 Contribuição
 
-## 🤝 Contribuição
+Contribuições são bem-vindas! Siga os passos abaixo para colaborar:
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
+Fork o projeto.
 
-1. **Fork** o projeto.
-2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`).
-3. Faça commit das suas alterações (`git commit -m 'Adiciona nova feature'`).
-4. Faça push para a branch (`git push origin feature/nova-feature`).
-5. Abra um Pull Request.
+Crie uma branch para sua feature:
 
-## 📜 Licença
+git checkout -b feature/nova-feature
 
-Este projeto está licenciado sob a Licença GPL-3.0 - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Faça commit das suas alterações:
+
+git commit -m 'Adiciona nova feature'
+
+Faça push para a branch:
+
+git push origin feature/nova-feature
+
+Abra um Pull Request e descreva suas alterações.
+
+📜 Licença
+
+Este projeto está licenciado sob a Licença GPL-3.0. Para mais detalhes, consulte o arquivo LICENSE.

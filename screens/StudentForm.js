@@ -13,8 +13,18 @@ export default function StudentForm({ route, navigation }) {
     weight: student?.weight || '',
     height: student?.height || '',
     notes: student?.notes || '',
-    frequencyDays: student?.frequencyDays || [], // Novo campo: Dias de Frequência
+    frequencyDays: student?.frequencyDays || [],
+    financialData: student?.financialData || { monthlyFee: '', dueDate: '' },
   });
+
+  // Função para formatar o CPF e limitar a 11 dígitos
+  const formatCPF = (text) => {
+    const onlyNumbers = text.replace(/\D/g, '').slice(0, 11); // Remove caracteres não numéricos e limita a 11 dígitos
+    return onlyNumbers
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+  };
 
   const handleSave = async () => {
     try {
@@ -26,7 +36,9 @@ export default function StudentForm({ route, navigation }) {
         : [...students, { ...formData, id: Date.now().toString() }];
 
       await AsyncStorage.setItem('@students', JSON.stringify(updatedStudents));
-      navigation.goBack();
+
+      // Após salvar, direcionar para a página de registro de exercícios
+      navigation.navigate('ExerciseLog', { student: { ...formData, id: updatedStudents.slice(-1)[0].id } });
     } catch (error) {
       console.error('Erro ao salvar aluno:', error);
     }
@@ -49,6 +61,8 @@ export default function StudentForm({ route, navigation }) {
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.container}>
           <Text style={styles.title}>{formData.id ? 'Editar Aluno' : 'Novo Aluno'}</Text>
+
+          {/* Dados Pessoais */}
           <TextInput
             label="Nome"
             value={formData.name}
@@ -59,8 +73,9 @@ export default function StudentForm({ route, navigation }) {
           <TextInput
             label="CPF"
             value={formData.cpf}
-            onChangeText={(text) => setFormData({ ...formData, cpf: text })}
+            onChangeText={(text) => setFormData({ ...formData, cpf: formatCPF(text) })}
             mode="outlined"
+            keyboardType="numeric"
             style={styles.input}
           />
           <TextInput
@@ -96,6 +111,7 @@ export default function StudentForm({ route, navigation }) {
             style={styles.input}
           />
 
+          {/* Dias de Frequência */}
           <Text style={styles.sectionTitle}>Dias de Frequência</Text>
           <View style={styles.frequencyContainer}>
             {[1, 2, 3, 4, 5, 6, 7].map((day) => (
@@ -108,8 +124,37 @@ export default function StudentForm({ route, navigation }) {
             ))}
           </View>
 
+          {/* Informações Financeiras */}
+          <Text style={styles.sectionTitle}>Informações Financeiras</Text>
+          <TextInput
+            label="Mensalidade (R$)"
+            value={formData.financialData.monthlyFee}
+            onChangeText={(text) =>
+              setFormData((prev) => ({
+                ...prev,
+                financialData: { ...prev.financialData, monthlyFee: text },
+              }))
+            }
+            mode="outlined"
+            keyboardType="numeric"
+            style={styles.input}
+          />
+          <TextInput
+            label="Data de Vencimento"
+            value={formData.financialData.dueDate}
+            onChangeText={(text) =>
+              setFormData((prev) => ({
+                ...prev,
+                financialData: { ...prev.financialData, dueDate: text },
+              }))
+            }
+            mode="outlined"
+            style={styles.input}
+          />
+
+          {/* Botão de Salvar */}
           <Button mode="contained" onPress={handleSave} style={styles.saveButton}>
-            Salvar
+            Salvar e Registrar Exercícios
           </Button>
         </View>
       </ScrollView>
