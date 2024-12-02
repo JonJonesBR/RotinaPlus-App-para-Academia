@@ -7,8 +7,15 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "platforms": ["ios", "android"],
-    "extra": {},
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "054768c2-1056-4ed4-89d3-1cda1fc275ed"
+      }
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.seudominio.rotinaplus",
@@ -36,12 +43,11 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-
     "newArchEnabled": true
-    },
-    "notifications": {
-      "icon": "./assets/notification-icon.png",
-      "color": "#FFFFFF",
-      "androidMode": "default"
-    }
+  },
+  "notifications": {
+    "icon": "./assets/notification-icon.png",
+    "color": "#FFFFFF",
+    "androidMode": "default"
   }
+}
