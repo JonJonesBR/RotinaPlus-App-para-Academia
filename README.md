@@ -28,8 +28,7 @@ Acesso a detalhes completos do aluno.
 Criação de séries de exercícios personalizadas.
 Vinculação de séries aos alunos cadastrados.
 Edição e exclusão de séries de forma individual.
-Registro de número de séries, repetições e carga aplicada.
-Visualização dos dias de frequência relacionados aos exercícios vinculados.
+Registro de número de séries e repetições.
 
 🏠 Navegação Simplificada
 
@@ -79,15 +78,19 @@ npx react-native run-ios
 Tela Inicial:
 
 Acesse as opções principais, como Gerenciar Alunos e Registro de Exercícios.
+
 Cadastro de Alunos:
 
 Registre os alunos preenchendo campos como nome, CPF, idade, altura, peso e dias de frequência.
+
 Gerenciamento de Treinos:
 
 Crie séries de exercícios, configure séries e repetições, e vincule-as aos alunos.
+
 Exclusões e Ajustes:
 
 Gerencie e exclua séries ou informações de alunos diretamente nas telas de gerenciamento.
+
 Navegação Intuitiva:
 
 Retorne à tela inicial utilizando atalhos disponíveis em todas as telas.
