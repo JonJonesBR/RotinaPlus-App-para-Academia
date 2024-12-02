@@ -1,8 +1,8 @@
-RotinaPlus - App para Academia
+#RotinaPlus - App para Academia
 
 Bem-vindo ao RotinaPlus, um aplicativo desenvolvido para facilitar a gestão de academias e otimizar o trabalho de profissionais autônomos de educação física. Com foco em organização e personalização, o RotinaPlus oferece ferramentas práticas para gerenciar alunos, treinos e informações de forma eficiente.
 
-🎯 Objetivo do Projeto
+#🎯 Objetivo do Projeto
 
 O RotinaPlus tem como objetivo principal otimizar o gerenciamento de treinos e a organização de informações relacionadas aos alunos, promovendo um ambiente mais organizado e funcional para academias e treinadores.
 
@@ -11,9 +11,9 @@ Com o aplicativo, é possível:
 Cadastrar e gerenciar alunos de forma detalhada.
 Criar, editar e vincular treinos personalizados aos alunos.
 Organizar dias de frequência e informações financeiras.
-Visualizar e gerenciar exercícios
-.
-✨ Funcionalidades
+Visualizar e gerenciar exercícios.
+
+#✨ Funcionalidades
 
 📋 Cadastro e Gerenciamento de Alunos
 
