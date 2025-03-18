@@ -47,7 +47,9 @@ Visualização integrada de vídeos de exercícios diretamente no app.
 ## 🛠️ Tecnologias Utilizadas
 
 Frontend: React Native.
+
 Gerenciamento de Dados: AsyncStorage para armazenamento local.
+
 Design: React Native Paper e Material Icons para componentes visuais.
 
 ## 💻 Instalação e Configuração
