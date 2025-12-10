@@ -43,7 +43,11 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "newArchEnabled": true
+    "newArchEnabled": true,
+    "plugins": [
+      "expo-barcode-scanner",
+      "expo-secure-store"
+    ]
   },
   "notifications": {
     "icon": "./assets/notification-icon.png",

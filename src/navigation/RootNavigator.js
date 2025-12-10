@@ -1,22 +1,31 @@
 /**
  * Configuração de navegação do aplicativo RotinaPlus
- * Com header estilizado e tema dinâmico
+ * 
+ * Nova estrutura com 3 stacks:
+ * - AuthStack: Telas de autenticação/cadastro
+ * - ProfessorStack: Área do professor
+ * - AlunoStack: Área do aluno
  */
-import React from 'react';
-import { Pressable, View, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Pressable, View, StyleSheet, ActivityIndicator } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useTheme } from '../theme/ThemeContext';
+import { UserService } from '../services/storageService';
+import { UserRole } from '../models/dataModels';
 
-// Telas
-import WelcomeScreen from '../screens/WelcomeScreen';
-import StudentForm from '../screens/StudentForm';
-import StudentListScreen from '../screens/StudentListScreen';
-import ExerciseLogScreen from '../screens/ExerciseLogScreen';
-import StudentManagementScreen from '../screens/StudentManagementScreen';
-import SeriesFormScreen from '../screens/SeriesFormScreen';
-import ConfirmSeriesScreen from '../screens/ConfirmSeriesScreen';
-import StudentDetailsScreen from '../screens/StudentDetailsScreen';
+// Auth Screens
+import {
+    RoleSelectionScreen,
+    ProfessorRegistrationScreen,
+    AlunoRegistrationScreen
+} from '../screens/auth';
+
+// Professor Screens
+import { ProfessorDashboardScreen } from '../screens/professor';
+
+// Aluno Screens
+import { AlunoDashboardScreen } from '../screens/aluno';
 
 const Stack = createStackNavigator();
 
@@ -38,18 +47,18 @@ function BackButton({ navigation, colors }) {
 }
 
 /**
- * Botão de home
+ * Botão de menu/settings
  */
-function HomeButton({ navigation, colors }) {
+function SettingsButton({ navigation, colors, route }) {
     return (
         <Pressable
-            onPress={() => navigation.navigate('WelcomeScreen')}
+            onPress={() => navigation.navigate(route)}
             style={({ pressed }) => [
                 styles.headerButton,
                 pressed && { opacity: 0.6 }
             ]}
         >
-            <Icon name="home" size={24} color={colors.text.primary} />
+            <Icon name="settings" size={24} color={colors.text.primary} />
         </Pressable>
     );
 }
@@ -59,6 +68,36 @@ function HomeButton({ navigation, colors }) {
  */
 export default function RootNavigator() {
     const { colors, isDark } = useTheme();
+    const [initialRoute, setInitialRoute] = useState(null);
+    const [userRole, setUserRole] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        checkAuth();
+    }, []);
+
+    const checkAuth = async () => {
+        try {
+            const user = await UserService.getCurrentUser();
+            const role = await UserService.getUserRole();
+
+            if (user && role) {
+                setUserRole(role);
+                if (role === UserRole.PROFESSOR) {
+                    setInitialRoute('ProfessorDashboard');
+                } else {
+                    setInitialRoute('AlunoDashboard');
+                }
+            } else {
+                setInitialRoute('RoleSelection');
+            }
+        } catch (error) {
+            console.error('Erro ao verificar auth:', error);
+            setInitialRoute('RoleSelection');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     // Opções padrão do header
     const defaultScreenOptions = {
@@ -81,77 +120,171 @@ export default function RootNavigator() {
         },
     };
 
+    if (loading) {
+        return (
+            <View style={[styles.loadingContainer, { backgroundColor: colors.background }]}>
+                <ActivityIndicator size="large" color={colors.primary} />
+            </View>
+        );
+    }
+
     return (
         <Stack.Navigator
-            initialRouteName="WelcomeScreen"
+            initialRouteName={initialRoute}
             screenOptions={defaultScreenOptions}
         >
+            {/* ============================================ */}
+            {/* AUTH STACK - Telas de autenticação */}
+            {/* ============================================ */}
             <Stack.Screen
-                name="WelcomeScreen"
-                component={WelcomeScreen}
+                name="RoleSelection"
+                component={RoleSelectionScreen}
                 options={{ headerShown: false }}
             />
             <Stack.Screen
-                name="StudentRegistration"
-                component={StudentForm}
+                name="ProfessorRegistration"
+                component={ProfessorRegistrationScreen}
                 options={({ navigation }) => ({
-                    title: 'Cadastro de Aluno',
+                    title: 'Cadastro',
                     headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
                 })}
             />
             <Stack.Screen
-                name="StudentList"
-                component={StudentListScreen}
+                name="AlunoRegistration"
+                component={AlunoRegistrationScreen}
                 options={({ navigation }) => ({
-                    title: 'Lista de Alunos',
+                    title: 'Cadastro',
                     headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
                 })}
             />
+
+            {/* ============================================ */}
+            {/* PROFESSOR STACK - Área do professor */}
+            {/* ============================================ */}
             <Stack.Screen
-                name="ExerciseLog"
-                component={ExerciseLogScreen}
-                options={({ navigation }) => ({
-                    title: 'Exercícios',
-                    headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
-                })}
+                name="ProfessorDashboard"
+                component={ProfessorDashboardScreen}
+                options={{ headerShown: false }}
             />
+            {/* TODO: Adicionar mais telas do professor
+      <Stack.Screen
+        name="ProfessorStudents"
+        component={ProfessorStudentsScreen}
+        options={({ navigation }) => ({
+          title: 'Meus Alunos',
+          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
+        })}
+      />
+      <Stack.Screen
+        name="ProfessorStudentDetail"
+        component={ProfessorStudentDetailScreen}
+        options={({ navigation }) => ({
+          title: 'Detalhes do Aluno',
+          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
+        })}
+      />
+      <Stack.Screen
+        name="ProfessorWorkouts"
+        component={ProfessorWorkoutsScreen}
+        options={({ navigation }) => ({
+          title: 'Treinos',
+          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
+        })}
+      />
+      <Stack.Screen
+        name="ProfessorWorkoutForm"
+        component={ProfessorWorkoutFormScreen}
+        options={({ navigation }) => ({
+          title: 'Novo Treino',
+          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
+        })}
+      />
+      <Stack.Screen
+        name="ProfessorFinancial"
+        component={ProfessorFinancialScreen}
+        options={({ navigation }) => ({
+          title: 'Financeiro',
+          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
+        })}
+      />
+      <Stack.Screen
+        name="ProfessorQRExport"
+        component={ProfessorQRExportScreen}
+        options={({ navigation }) => ({
+          title: 'Gerar QR Code',
+          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
+        })}
+      />
+      <Stack.Screen
+        name="ProfessorSettings"
+        component={ProfessorSettingsScreen}
+        options={({ navigation }) => ({
+          title: 'Configurações',
+          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
+        })}
+      />
+      */}
+
+            {/* ============================================ */}
+            {/* ALUNO STACK - Área do aluno */}
+            {/* ============================================ */}
             <Stack.Screen
-                name="StudentManagement"
-                component={StudentManagementScreen}
-                options={({ navigation }) => ({
-                    title: 'Gerenciar Alunos',
-                    headerLeft: () => <HomeButton navigation={navigation} colors={colors} />,
-                })}
+                name="AlunoDashboard"
+                component={AlunoDashboardScreen}
+                options={{ headerShown: false }}
             />
-            <Stack.Screen
-                name="StudentDetails"
-                component={StudentDetailsScreen}
-                options={({ navigation }) => ({
-                    title: 'Detalhes do Aluno',
-                    headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
-                })}
-            />
-            <Stack.Screen
-                name="SeriesForm"
-                component={SeriesFormScreen}
-                options={({ navigation }) => ({
-                    title: 'Série de Exercícios',
-                    headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
-                })}
-            />
-            <Stack.Screen
-                name="ConfirmSeries"
-                component={ConfirmSeriesScreen}
-                options={({ navigation }) => ({
-                    title: 'Confirmar Série',
-                    headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
-                })}
-            />
+            {/* TODO: Adicionar mais telas do aluno
+      <Stack.Screen
+        name="AlunoWorkoutDetail"
+        component={AlunoWorkoutDetailScreen}
+        options={({ navigation }) => ({
+          title: 'Meu Treino',
+          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
+        })}
+      />
+      <Stack.Screen
+        name="AlunoProgress"
+        component={AlunoProgressScreen}
+        options={({ navigation }) => ({
+          title: 'Meu Progresso',
+          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
+        })}
+      />
+      <Stack.Screen
+        name="AlunoFinancial"
+        component={AlunoFinancialScreen}
+        options={({ navigation }) => ({
+          title: 'Financeiro',
+          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
+        })}
+      />
+      <Stack.Screen
+        name="AlunoQRImport"
+        component={AlunoQRImportScreen}
+        options={({ navigation }) => ({
+          title: 'Importar QR Code',
+          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
+        })}
+      />
+      <Stack.Screen
+        name="AlunoSettings"
+        component={AlunoSettingsScreen}
+        options={({ navigation }) => ({
+          title: 'Configurações',
+          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
+        })}
+      />
+      */}
         </Stack.Navigator>
     );
 }
 
 const styles = StyleSheet.create({
+    loadingContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     headerButton: {
         padding: 8,
         marginLeft: 8,
@@ -161,12 +294,26 @@ const styles = StyleSheet.create({
 
 // Exporta nomes das rotas para uso tipado
 export const ROUTES = {
-    WELCOME: 'WelcomeScreen',
-    STUDENT_REGISTRATION: 'StudentRegistration',
-    STUDENT_LIST: 'StudentList',
-    EXERCISE_LOG: 'ExerciseLog',
-    STUDENT_MANAGEMENT: 'StudentManagement',
-    STUDENT_DETAILS: 'StudentDetails',
-    SERIES_FORM: 'SeriesForm',
-    CONFIRM_SERIES: 'ConfirmSeries',
+    // Auth
+    ROLE_SELECTION: 'RoleSelection',
+    PROFESSOR_REGISTRATION: 'ProfessorRegistration',
+    ALUNO_REGISTRATION: 'AlunoRegistration',
+
+    // Professor
+    PROFESSOR_DASHBOARD: 'ProfessorDashboard',
+    PROFESSOR_STUDENTS: 'ProfessorStudents',
+    PROFESSOR_STUDENT_DETAIL: 'ProfessorStudentDetail',
+    PROFESSOR_WORKOUTS: 'ProfessorWorkouts',
+    PROFESSOR_WORKOUT_FORM: 'ProfessorWorkoutForm',
+    PROFESSOR_FINANCIAL: 'ProfessorFinancial',
+    PROFESSOR_QR_EXPORT: 'ProfessorQRExport',
+    PROFESSOR_SETTINGS: 'ProfessorSettings',
+
+    // Aluno
+    ALUNO_DASHBOARD: 'AlunoDashboard',
+    ALUNO_WORKOUT_DETAIL: 'AlunoWorkoutDetail',
+    ALUNO_PROGRESS: 'AlunoProgress',
+    ALUNO_FINANCIAL: 'AlunoFinancial',
+    ALUNO_QR_IMPORT: 'AlunoQRImport',
+    ALUNO_SETTINGS: 'AlunoSettings',
 };
