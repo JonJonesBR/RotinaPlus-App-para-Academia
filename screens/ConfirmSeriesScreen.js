@@ -4,6 +4,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ConfirmSeriesScreen({ route, navigation }) {
   const { series, student } = route.params || {};
+  
+  // Hooks devem ser chamados antes de qualquer return condicional
+  const [sets, setSets] = React.useState(3);
+  const [reps, setReps] = React.useState(10);
 
   if (!student || !series) {
     return (
@@ -20,9 +24,6 @@ export default function ConfirmSeriesScreen({ route, navigation }) {
       </View>
     );
   }
-
-  const [sets, setSets] = React.useState(3);
-  const [reps, setReps] = React.useState(10);
 
   const handleConfirm = async () => {
     try {

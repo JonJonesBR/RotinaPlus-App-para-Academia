@@ -1,126 +1,190 @@
-# RotinaPlus - App para Academias e Profissionais de Educação Física
+<div align="center">
+  <img src="assets/icon.png" alt="RotinaPlus Logo" width="120" height="120">
+  
+  # RotinaPlus 🏋️
+  
+  **Aplicativo para Academias e Profissionais de Educação Física**
+  
+  [![Versão](https://img.shields.io/badge/versão-0.0.5-blue.svg)](https://github.com/JonJonesBR/RotinaPlus-App-para-Academia/releases)
+  [![Licença](https://img.shields.io/badge/licença-MIT-green.svg)](LICENSE)
+  [![React Native](https://img.shields.io/badge/React%20Native-0.76.3-61DAFB.svg?logo=react)](https://reactnative.dev/)
+  [![Expo](https://img.shields.io/badge/Expo-52.0-000020.svg?logo=expo)](https://expo.dev/)
+  
+  [📱 Download APK](https://github.com/JonJonesBR/RotinaPlus-App-para-Academia/releases/download/v0.0.5/ROTINA+.ALPHA.0.0.5.apk) • [📖 Documentação](#-uso) • [🤝 Contribuir](#-contribuição)
+</div>
 
-Bem-vindo ao RotinaPlus, um aplicativo desenvolvido para facilitar a gestão de academias e otimizar o trabalho de profissionais autônomos de educação física. 
+---
 
-Com foco em organização e personalização, o RotinaPlus oferece ferramentas práticas para gerenciar alunos, treinos e informações de forma eficiente.
+## 📖 Sobre
 
-## Faça o Dowload da Última Versão do App Aqui: https://github.com/JonJonesBR/RotinaPlus-App-para-Academia/releases/download/v0.0.5/ROTINA+.ALPHA.0.0.5.apk 
+O **RotinaPlus** é um aplicativo desenvolvido para facilitar a gestão de academias e otimizar o trabalho de profissionais autônomos de educação física. Com foco em organização e personalização, oferece ferramentas práticas para gerenciar alunos, treinos e informações de forma eficiente.
 
-## 🎯 Objetivo do Projeto
+### 🎯 Objetivo
 
-O RotinaPlus tem como objetivo principal otimizar o gerenciamento de treinos e a organização de informações relacionadas aos alunos, promovendo um ambiente mais organizado e funcional para academias e treinadores.
+Otimizar o gerenciamento de treinos e a organização de informações relacionadas aos alunos, promovendo um ambiente mais organizado e funcional para academias e treinadores.
 
-Com o aplicativo, é possível:
-
-Cadastrar e gerenciar alunos de forma detalhada.
-Criar, editar e vincular treinos personalizados aos alunos.
-Organizar dias de frequência e informações financeiras.
-Visualizar e gerenciar exercícios.
+---
 
 ## ✨ Funcionalidades
 
 ### 📋 Cadastro e Gerenciamento de Alunos
-
-Cadastro completo de informações pessoais: nome, CPF, idade, peso, altura e observações.
-Registro de frequência semanal.
-Informações financeiras, como mensalidade e vencimento.
-Edição e exclusão de dados dos alunos.
-Acesso a detalhes completos do aluno.
+- Cadastro completo de informações pessoais: nome, CPF, idade, peso, altura e observações
+- Registro de frequência semanal
+- Informações financeiras, como mensalidade e vencimento
+- Edição e exclusão de dados dos alunos
+- Acesso a detalhes completos do aluno
 
 ### 🏋️ Gerenciamento de Exercícios e Séries
-
-Criação de séries de exercícios personalizadas.
-Vinculação de séries aos alunos cadastrados.
-Edição e exclusão de séries de forma individual.
-Registro de número de séries e repetições.
+- Criação de séries de exercícios personalizadas
+- Vinculação de séries aos alunos cadastrados
+- Edição e exclusão de séries de forma individual
+- Registro de número de séries e repetições
 
 ### 🏠 Navegação Simplificada
+- Tela inicial clara e intuitiva, com atalhos para gerenciamento de alunos e exercícios
+- Opção de retornar à tela inicial diretamente em qualquer funcionalidade
 
-Tela inicial clara e intuitiva, com atalhos para gerenciamento de alunos e exercícios.
-Opção de retornar à tela inicial diretamente em qualquer funcionalidade.
+---
 
-## 🚀 Funcionalidades Futuras
-
-Planejamento de refeições e contagem de calorias (em desenvolvimento).
-Visualização integrada de vídeos de exercícios diretamente no app.
-
-## 🛠️ Tecnologias Utilizadas
-
-Frontend: React Native.
-
-Gerenciamento de Dados: AsyncStorage para armazenamento local.
-
-Design: React Native Paper e Material Icons para componentes visuais.
-
-## 💻 Instalação e Configuração
+## 🚀 Instalação
 
 ### Pré-requisitos
 
-Node.js
-npm ou yarn
-React Native CLI configurado no ambiente.
+- [Node.js](https://nodejs.org/) (v18+)
+- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)
+- Dispositivo Android/iOS ou emulador
 
-### Passos para Instalação
+### Passos
 
-## Clone o repositório:
+1. **Clone o repositório**
+   ```bash
+   git clone https://github.com/JonJonesBR/RotinaPlus-App-para-Academia.git
+   cd RotinaPlus-App-para-Academia
+   ```
 
-git clone https://github.com/JonJonesBR/RotinaPlus-App-para-Academia.git
-cd RotinaPlus-App-para-Academia
+2. **Instale as dependências**
+   ```bash
+   npm install
+   ```
 
-## Instale as dependências:
+3. **Inicie o servidor de desenvolvimento**
+   ```bash
+   npx expo start
+   ```
 
-npm install
+4. **Abra no dispositivo**
+   - Escaneie o QR code com o app [Expo Go](https://expo.dev/client)
+   - Ou pressione `a` para abrir no emulador Android
+   - Ou pressione `i` para abrir no simulador iOS
 
-## Inicie o aplicativo:
+---
 
-npx react-native run-android
+## 📂 Estrutura do Projeto
 
-ou para iOS
+```
+RotinaPlus-App-para-Academia/
+├── src/
+│   ├── components/         # Componentes reutilizáveis
+│   ├── screens/            # Telas do aplicativo
+│   │   ├── WelcomeScreen.js
+│   │   ├── StudentForm.js
+│   │   ├── StudentListScreen.js
+│   │   ├── StudentManagementScreen.js
+│   │   ├── StudentDetailsScreen.js
+│   │   ├── ExerciseLogScreen.js
+│   │   ├── SeriesFormScreen.js
+│   │   └── ConfirmSeriesScreen.js
+│   ├── navigation/         # Configuração de rotas
+│   ├── services/           # Lógica de negócio
+│   ├── utils/              # Funções utilitárias
+│   └── theme/              # Estilos e tema global
+├── assets/                 # Imagens e recursos
+├── App.js                  # Ponto de entrada
+├── app.json                # Configuração Expo
+└── package.json            # Dependências
+```
 
-npx react-native run-ios
+---
 
-### 📚 Uso
+## 📱 Uso
 
-## Tela Inicial:
+### Tela Inicial
+Acesse as opções principais, como **Gerenciar Alunos** e **Registro de Exercícios**.
 
-Acesse as opções principais, como Gerenciar Alunos e Registro de Exercícios.
-
-## Cadastro de Alunos:
-
+### Cadastro de Alunos
 Registre os alunos preenchendo campos como nome, CPF, idade, altura, peso e dias de frequência.
 
-## Gerenciamento de Treinos:
-
+### Gerenciamento de Treinos
 Crie séries de exercícios, configure séries e repetições, e vincule-as aos alunos.
 
-## Exclusões e Ajustes:
-
+### Exclusões e Ajustes
 Gerencie e exclua séries ou informações de alunos diretamente nas telas de gerenciamento.
 
-## Navegação Intuitiva:
+---
 
-Retorne à tela inicial utilizando atalhos disponíveis em todas as telas.
+## 🛠️ Tecnologias
 
-### 🤝 Contribuição
+| Tecnologia | Versão | Descrição |
+|------------|--------|-----------|
+| [React Native](https://reactnative.dev/) | 0.76.3 | Framework mobile cross-platform |
+| [Expo](https://expo.dev/) | 52.0 | Plataforma de desenvolvimento |
+| [React Navigation](https://reactnavigation.org/) | 6.x | Sistema de navegação |
+| [React Native Paper](https://callstack.github.io/react-native-paper/) | 5.12.5 | Biblioteca de componentes UI |
+| [AsyncStorage](https://react-native-async-storage.github.io/async-storage/) | 1.23.1 | Armazenamento local persistente |
 
-## Contribuições são bem-vindas! Siga os passos abaixo para colaborar:
+---
 
-Fork o projeto.
+## 🗺️ Roadmap
 
-## Crie uma branch para sua feature:
+- [ ] 🍽️ Planejamento de refeições e contagem de calorias
+- [ ] 🎥 Visualização integrada de vídeos de exercícios
+- [ ] ☁️ Backup e sincronização na nuvem
+- [ ] 📊 Relatórios e gráficos de progresso
+- [ ] 🔔 Notificações de vencimento de mensalidades
+- [ ] 📱 Versão para iOS na App Store
 
-git checkout -b feature/nova-feature
+---
 
-## Faça commit das suas alterações:
+## 🤝 Contribuição
 
-git commit -m 'Adiciona nova feature'
+Contribuições são bem-vindas! Siga os passos abaixo para colaborar:
 
-## Faça push para a branch:
+1. **Fork** o projeto
+2. Crie uma branch para sua feature:
+   ```bash
+   git checkout -b feature/nova-feature
+   ```
+3. Faça commit das suas alterações:
+   ```bash
+   git commit -m 'Add: nova feature'
+   ```
+4. Faça push para a branch:
+   ```bash
+   git push origin feature/nova-feature
+   ```
+5. Abra um **Pull Request** e descreva suas alterações
 
-git push origin feature/nova-feature
+### Padrões de Commit
 
-## Abra um Pull Request e descreva suas alterações.
+- `Add:` para novas funcionalidades
+- `Fix:` para correções de bugs
+- `Docs:` para atualizações de documentação
+- `Refactor:` para refatorações de código
+- `Style:` para alterações de estilo/formatação
 
-### 📜 Licença
+---
 
-Este projeto está licenciado sob a Licença GPL-3.0. Para mais detalhes, consulte o arquivo LICENSE.
+## 📜 Licença
+
+Este projeto está licenciado sob a **Licença MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+<div align="center">
+  
+  Desenvolvido com ❤️ por [JonJonesBR](https://github.com/JonJonesBR)
+  
+  ⭐ Se este projeto te ajudou, considere dar uma estrela!
+  
+</div>
