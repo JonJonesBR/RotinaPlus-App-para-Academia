@@ -26,12 +26,16 @@ import {
   ProfessorDashboardScreen,
   ProfessorFinancialScreen,
   ProfessorQRExportScreen,
+  ProfessorStudentsScreen,
+  ProfessorWorkoutFormScreen,
 } from '../screens/professor';
 
 // Aluno Screens
 import {
   AlunoDashboardScreen,
   AlunoFinancialScreen,
+  AlunoQRImportScreen,
+  AlunoWorkoutDetailScreen,
 } from '../screens/aluno';
 
 const Stack = createStackNavigator();
@@ -189,28 +193,11 @@ export default function RootNavigator() {
           headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
         })}
       />
-      {/* TODO: Adicionar mais telas do professor
       <Stack.Screen
         name="ProfessorStudents"
         component={ProfessorStudentsScreen}
         options={({ navigation }) => ({
           title: 'Meus Alunos',
-          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
-        })}
-      />
-      <Stack.Screen
-        name="ProfessorStudentDetail"
-        component={ProfessorStudentDetailScreen}
-        options={({ navigation }) => ({
-          title: 'Detalhes do Aluno',
-          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
-        })}
-      />
-      <Stack.Screen
-        name="ProfessorWorkouts"
-        component={ProfessorWorkoutsScreen}
-        options={({ navigation }) => ({
-          title: 'Treinos',
           headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
         })}
       />
@@ -222,31 +209,6 @@ export default function RootNavigator() {
           headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
         })}
       />
-      <Stack.Screen
-        name="ProfessorFinancial"
-        component={ProfessorFinancialScreen}
-        options={({ navigation }) => ({
-          title: 'Financeiro',
-          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
-        })}
-      />
-      <Stack.Screen
-        name="ProfessorQRExport"
-        component={ProfessorQRExportScreen}
-        options={({ navigation }) => ({
-          title: 'Gerar QR Code',
-          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
-        })}
-      />
-      <Stack.Screen
-        name="ProfessorSettings"
-        component={ProfessorSettingsScreen}
-        options={({ navigation }) => ({
-          title: 'Configurações',
-          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
-        })}
-      />
-      */}
 
       {/* ============================================ */}
       {/* ALUNO STACK - Área do aluno */}
@@ -264,28 +226,11 @@ export default function RootNavigator() {
           headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
         })}
       />
-      {/* TODO: Adicionar mais telas do aluno
       <Stack.Screen
         name="AlunoWorkoutDetail"
         component={AlunoWorkoutDetailScreen}
         options={({ navigation }) => ({
           title: 'Meu Treino',
-          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
-        })}
-      />
-      <Stack.Screen
-        name="AlunoProgress"
-        component={AlunoProgressScreen}
-        options={({ navigation }) => ({
-          title: 'Meu Progresso',
-          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
-        })}
-      />
-      <Stack.Screen
-        name="AlunoFinancial"
-        component={AlunoFinancialScreen}
-        options={({ navigation }) => ({
-          title: 'Financeiro',
           headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
         })}
       />
@@ -297,15 +242,6 @@ export default function RootNavigator() {
           headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
         })}
       />
-      <Stack.Screen
-        name="AlunoSettings"
-        component={AlunoSettingsScreen}
-        options={({ navigation }) => ({
-          title: 'Configurações',
-          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
-        })}
-      />
-      */}
     </Stack.Navigator>
   );
 }
