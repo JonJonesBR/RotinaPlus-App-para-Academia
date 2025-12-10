@@ -28,6 +28,7 @@ import {
   ProfessorQRExportScreen,
   ProfessorStudentsScreen,
   ProfessorWorkoutFormScreen,
+  ProfessorSettingsScreen,
 } from '../screens/professor';
 
 // Aluno Screens
@@ -36,6 +37,7 @@ import {
   AlunoFinancialScreen,
   AlunoQRImportScreen,
   AlunoWorkoutDetailScreen,
+  AlunoSettingsScreen,
 } from '../screens/aluno';
 
 const Stack = createStackNavigator();
@@ -209,6 +211,14 @@ export default function RootNavigator() {
           headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
         })}
       />
+      <Stack.Screen
+        name="ProfessorSettings"
+        component={ProfessorSettingsScreen}
+        options={({ navigation }) => ({
+          title: 'Configurações',
+          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
+        })}
+      />
 
       {/* ============================================ */}
       {/* ALUNO STACK - Área do aluno */}
@@ -239,6 +249,14 @@ export default function RootNavigator() {
         component={AlunoQRImportScreen}
         options={({ navigation }) => ({
           title: 'Importar QR Code',
+          headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
+        })}
+      />
+      <Stack.Screen
+        name="AlunoSettings"
+        component={AlunoSettingsScreen}
+        options={({ navigation }) => ({
+          title: 'Configurações',
           headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
         })}
       />

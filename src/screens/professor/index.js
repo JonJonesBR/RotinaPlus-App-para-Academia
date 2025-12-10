@@ -3,7 +3,4 @@ export { default as ProfessorFinancialScreen } from './ProfessorFinancialScreen'
 export { default as ProfessorQRExportScreen } from './ProfessorQRExportScreen';
 export { default as ProfessorStudentsScreen } from './ProfessorStudentsScreen';
 export { default as ProfessorWorkoutFormScreen } from './ProfessorWorkoutFormScreen';
-// TODO: Add remaining screens
-// export { default as ProfessorStudentDetailScreen } from './ProfessorStudentDetailScreen';
-// export { default as ProfessorWorkoutsScreen } from './ProfessorWorkoutsScreen';
-// export { default as ProfessorSettingsScreen } from './ProfessorSettingsScreen';
+export { default as ProfessorSettingsScreen } from './ProfessorSettingsScreen';

@@ -108,6 +108,13 @@ export const UserService = {
         const user = await this.getCurrentUser();
         return user !== null;
     },
+
+    /**
+     * Alias para clearSession - Faz logout
+     */
+    async logout() {
+        return this.clearSession();
+    },
 };
 
 // ============================================
