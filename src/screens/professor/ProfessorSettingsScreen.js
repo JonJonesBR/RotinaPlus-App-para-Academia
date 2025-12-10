@@ -18,6 +18,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useTheme } from '../../theme/ThemeContext';
 import { UserService, ProfessorService } from '../../services/storageService';
 import { NotificationService } from '../../services/notificationService';
+import { AuthService } from '../../services/authService';
 import { PixKeyType, validators } from '../../models/dataModels';
 import { PremiumCard, PremiumButton } from '../../components/common';
 
@@ -45,6 +46,7 @@ export default function ProfessorSettingsScreen({ navigation }) {
         payments: true,
         newStudents: true,
     });
+    const [pinEnabled, setPinEnabled] = useState(false);
     const [loading, setLoading] = useState(false);
     const [hasChanges, setHasChanges] = useState(false);
 
@@ -55,6 +57,10 @@ export default function ProfessorSettingsScreen({ navigation }) {
     const loadData = async () => {
         const user = await UserService.getCurrentUser();
         setProfessor(user);
+
+        // Check PIN status
+        const isPinOn = await AuthService.isPinEnabled();
+        setPinEnabled(isPinOn);
 
         if (user) {
             setForm({
@@ -306,6 +312,34 @@ export default function ProfessorSettingsScreen({ navigation }) {
                         <Switch
                             value={notifications.payments}
                             onValueChange={(v) => setNotifications(prev => ({ ...prev, payments: v }))}
+                            trackColor={{ true: colors.primary }}
+                        />
+                    }
+                />
+            </PremiumCard>
+
+            {/* Security */}
+            <Text style={[styles.sectionTitle, { color: colors.text.secondary }]}>
+                SEGURANÇA
+            </Text>
+            <PremiumCard style={styles.settingsCard}>
+                <SettingRow
+                    icon="lock"
+                    title="Bloqueio por PIN"
+                    subtitle={pinEnabled ? 'Ativado' : 'Desativado'}
+                    right={
+                        <Switch
+                            value={pinEnabled}
+                            onValueChange={async (enabled) => {
+                                if (enabled) {
+                                    // Navigate to PIN setup
+                                    navigation.navigate('PinSetup');
+                                } else {
+                                    // Disable PIN
+                                    await AuthService.removePin();
+                                    setPinEnabled(false);
+                                }
+                            }}
                             trackColor={{ true: colors.primary }}
                         />
                     }

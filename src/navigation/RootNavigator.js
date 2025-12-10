@@ -18,7 +18,8 @@ import { UserRole } from '../models/dataModels';
 import {
   RoleSelectionScreen,
   ProfessorRegistrationScreen,
-  AlunoRegistrationScreen
+  AlunoRegistrationScreen,
+  PinLockScreen,
 } from '../screens/auth';
 
 // Professor Screens
@@ -169,6 +170,18 @@ export default function RootNavigator() {
           title: 'Cadastro',
           headerLeft: () => <BackButton navigation={navigation} colors={colors} />,
         })}
+      />
+      <Stack.Screen
+        name="PinSetup"
+        component={PinLockScreen}
+        initialParams={{ mode: 'setup' }}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="PinLock"
+        component={PinLockScreen}
+        initialParams={{ mode: 'verify' }}
+        options={{ headerShown: false }}
       />
 
       {/* ============================================ */}
