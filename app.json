@@ -45,7 +45,6 @@
     },
     "newArchEnabled": true,
     "plugins": [
-      "expo-barcode-scanner",
       "expo-secure-store"
     ],
     "notification": {
