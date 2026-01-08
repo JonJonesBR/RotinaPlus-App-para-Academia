@@ -3,60 +3,61 @@
   
   # RotinaPlus 🏋️
   
-  **Aplicativo para Academias e Profissionais de Educação Física**
+  **A Solução Completa para Academias e Personal Trainers**
   
   [![Versão](https://img.shields.io/badge/versão-0.0.5-blue.svg)](https://github.com/JonJonesBR/RotinaPlus-App-para-Academia/releases)
   [![Licença](https://img.shields.io/badge/licença-MIT-green.svg)](LICENSE)
-  [![React Native](https://img.shields.io/badge/React%20Native-0.76.3-61DAFB.svg?logo=react)](https://reactnative.dev/)
-  [![Expo](https://img.shields.io/badge/Expo-52.0-000020.svg?logo=expo)](https://expo.dev/)
+  [![React Native](https://img.shields.io/badge/React%20Native-0.81+-61DAFB.svg?logo=react)](https://reactnative.dev/)
+  [![Expo](https://img.shields.io/badge/Expo-SDK%2052+-000020.svg?logo=expo)](https://expo.dev/)
   
-  [📱 Download APK](https://github.com/JonJonesBR/RotinaPlus-App-para-Academia/releases/download/v0.0.5/ROTINA+.ALPHA.0.0.5.apk) • [📖 Documentação](#-uso) • [🤝 Contribuir](#-contribuição)
+  [📱 Download APK v0.0.5](https://github.com/JonJonesBR/RotinaPlus-App-para-Academia/releases/download/v0.0.5/RotinaPlus-v0.0.5.apk) • [📖 Documentação](#-uso) • [🤝 Contribuir](#-contribuição)
 </div>
 
 ---
 
 ## 📖 Sobre
 
-O **RotinaPlus** é um aplicativo desenvolvido para facilitar a gestão de academias e otimizar o trabalho de profissionais autônomos de educação física. Com foco em organização e personalização, oferece ferramentas práticas para gerenciar alunos, treinos e informações de forma eficiente.
+O **RotinaPlus** é um aplicativo robusto e inovador desenvolvido para modernizar a gestão de treinos e alunos. Com sua arquitetura **Dual Mode**, ele atende tanto **Professores/Academias** quanto **Alunos**, oferecendo uma experiência personalizada e segura para cada perfil.
 
-### 🎯 Objetivo
-
-Otimizar o gerenciamento de treinos e a organização de informações relacionadas aos alunos, promovendo um ambiente mais organizado e funcional para academias e treinadores.
+O app foca na segurança dos dados (armazenamento local criptografado), facilidade de compartilhamento (QR Codes offline) e usabilidade premium.
 
 ---
 
-## ✨ Funcionalidades
+## ✨ Funcionalidades Principais
 
-### 📋 Cadastro e Gerenciamento de Alunos
-- Cadastro completo de informações pessoais: nome, CPF, idade, peso, altura e observações
-- Registro de frequência semanal
-- Informações financeiras, como mensalidade e vencimento
-- Edição e exclusão de dados dos alunos
-- Acesso a detalhes completos do aluno
+### 🔐 Segurança e Autenticação
+- **Modo Dual**: Interface adaptativa para Professor ou Aluno.
+- **Proteção Biométrica**: Suporte a FaceID/TouchID para acesso rápido e seguro.
+- **PIN de Segurança**: Bloqueio por senha numérica como fallback.
+- **Criptografia**: Dados sensíveis armazenados com `SecureStore` e hash SHA-256.
 
-### 🏋️ Gerenciamento de Exercícios e Séries
-- Criação de séries de exercícios personalizadas
-- Vinculação de séries aos alunos cadastrados
-- Edição e exclusão de séries de forma individual
-- Registro de número de séries e repetições
+### 👨‍🏫 Modo Professor
+- **Gestão de Alunos**: Cadastro completo, histórico e status de pagamento.
+- **Montagem de Treinos**: Ferramenta flexível para criar rotinas personalizadas (Séries, Repetições, Carga, Descanso).
+- **QR Code Export**: Compartilhe treinos e vínculos com alunos instantaneamente via QR Code.
+- **Gestão Financeira**: Controle de mensalidades, chaves PIX e status de pagamentos.
 
-### 🏠 Navegação Simplificada
-- Tela inicial clara e intuitiva, com atalhos para gerenciamento de alunos e exercícios
-- Opção de retornar à tela inicial diretamente em qualquer funcionalidade
+### 🏋️ Modo Aluno
+- **Dashboard Personalizado**: Visualização clara dos treinos do dia.
+- **QR Code Import**: Receba treinos e vincule-se ao professor escaneando um código.
+- **Histórico**: Acompanhe a frequência e evolução.
+- **Carteira Digital**: Informações de pagamento e status da mensalidade.
+
+### 📡 Sincronização Offline (QR Sync)
+- Tecnologia proprietária de transferência de dados via QR Code.
+- Funciona sem internet: O professor gera o código, o aluno escaneia e os dados são transferidos localmente.
+- Assinatura digital para garantir a integridade dos dados.
 
 ---
 
-## 🚀 Instalação
+## 🚀 Instalação e Desenvolvimento
 
 ### Pré-requisitos
-
 - [Node.js](https://nodejs.org/) (v18+)
-- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
 - [Expo CLI](https://docs.expo.dev/get-started/installation/)
-- Dispositivo Android/iOS ou emulador
+- Dispositivo Android/iOS ou Emulador
 
-### Passos
-
+### Configuração do Ambiente
 1. **Clone o repositório**
    ```bash
    git clone https://github.com/JonJonesBR/RotinaPlus-App-para-Academia.git
@@ -68,15 +69,15 @@ Otimizar o gerenciamento de treinos e a organização de informações relaciona
    npm install
    ```
 
-3. **Inicie o servidor de desenvolvimento**
+3. **Inicie o servidor**
    ```bash
    npx expo start
    ```
 
-4. **Abra no dispositivo**
-   - Escaneie o QR code com o app [Expo Go](https://expo.dev/client)
-   - Ou pressione `a` para abrir no emulador Android
-   - Ou pressione `i` para abrir no simulador iOS
+4. **Testes** (Opcional)
+   ```bash
+   npm test
+   ```
 
 ---
 
@@ -85,106 +86,61 @@ Otimizar o gerenciamento de treinos e a organização de informações relaciona
 ```
 RotinaPlus-App-para-Academia/
 ├── src/
-│   ├── components/         # Componentes reutilizáveis
-│   ├── screens/            # Telas do aplicativo
-│   │   ├── WelcomeScreen.js
-│   │   ├── StudentForm.js
-│   │   ├── StudentListScreen.js
-│   │   ├── StudentManagementScreen.js
-│   │   ├── StudentDetailsScreen.js
-│   │   ├── ExerciseLogScreen.js
-│   │   ├── SeriesFormScreen.js
-│   │   └── ConfirmSeriesScreen.js
-│   ├── navigation/         # Configuração de rotas
-│   ├── services/           # Lógica de negócio
-│   ├── utils/              # Funções utilitárias
-│   └── theme/              # Estilos e tema global
-├── assets/                 # Imagens e recursos
-├── App.js                  # Ponto de entrada
-├── app.json                # Configuração Expo
-└── package.json            # Dependências
+│   ├── components/         # UI Kit reutilizável (Cards, Buttons, Inputs)
+│   ├── screens/
+│   │   ├── auth/           # Telas de Login, PIN, Biometria
+│   │   ├── professor/      # Dashboard e ferramentas do Professor
+│   │   ├── aluno/          # Dashboard e ferramentas do Aluno
+│   │   └── common/         # Telas compartilhadas
+│   ├── services/           # Camada de Serviços
+│   │   ├── authService.js      # Lógica de Autenticação
+│   │   ├── cryptoService.js    # Criptografia e Segurança
+│   │   ├── storageService.js   # Persistência de Dados (AsyncStorage)
+│   │   ├── qrCodeService.js    # Geração/Leitura de QR Codes
+│   │   └── notificationService.js # Notificações Locais
+│   ├── models/             # Definições de Tipos e Factories
+│   ├── utils/              # Formatadores e Helpers
+│   └── theme/              # Tokens de Design e Tema Escuro/Claro
+├── assets/                 # Imagens e Fontes
+├── __tests__/              # Testes Unitários (Jest)
+├── App.js                  # Entry Point e Configuração de Contextos
+└── app.json                # Configuração Expo (Plugins, Permissões)
 ```
 
 ---
 
-## 📱 Uso
+## 🗺️ Roadmap & Status
 
-### Tela Inicial
-Acesse as opções principais, como **Gerenciar Alunos** e **Registro de Exercícios**.
-
-### Cadastro de Alunos
-Registre os alunos preenchendo campos como nome, CPF, idade, altura, peso e dias de frequência.
-
-### Gerenciamento de Treinos
-Crie séries de exercícios, configure séries e repetições, e vincule-as aos alunos.
-
-### Exclusões e Ajustes
-Gerencie e exclua séries ou informações de alunos diretamente nas telas de gerenciamento.
-
----
-
-## 🛠️ Tecnologias
-
-| Tecnologia | Versão | Descrição |
-|------------|--------|-----------|
-| [React Native](https://reactnative.dev/) | 0.76.3 | Framework mobile cross-platform |
-| [Expo](https://expo.dev/) | 52.0 | Plataforma de desenvolvimento |
-| [React Navigation](https://reactnavigation.org/) | 6.x | Sistema de navegação |
-| [React Native Paper](https://callstack.github.io/react-native-paper/) | 5.12.5 | Biblioteca de componentes UI |
-| [AsyncStorage](https://react-native-async-storage.github.io/async-storage/) | 1.23.1 | Armazenamento local persistente |
-
----
-
-## 🗺️ Roadmap
-
-- [ ] 🍽️ Planejamento de refeições e contagem de calorias
-- [ ] 🎥 Visualização integrada de vídeos de exercícios
-- [ ] ☁️ Backup e sincronização na nuvem
-- [ ] 📊 Relatórios e gráficos de progresso
-- [ ] 🔔 Notificações de vencimento de mensalidades
-- [ ] 📱 Versão para iOS na App Store
+- [x] ✅ **Refatoração UI/UX (Design System Premium)**
+- [x] ✅ **Modo Dual (Aluno/Professor)**
+- [x] ✅ **Sistema de Autenticação (PIN/Biometria)**
+- [x] ✅ **Sincronização via QR Code (QR Sync)**
+- [x] ✅ **Notificações Locais**
+- [x] ✅ **Cobertura de Testes Unitários**
+- [ ] ☁️ Backup em Nuvem (Futuro)
+- [ ] 📊 Gráficos de Evolução Avançados (Futuro)
+- [ ] 🍎 Publicação na App Store (Futuro)
 
 ---
 
 ## 🤝 Contribuição
 
-Contribuições são bem-vindas! Siga os passos abaixo para colaborar:
+Contribuições são bem-vindas! Siga o fluxo de **Feature Branch**:
 
-1. **Fork** o projeto
-2. Crie uma branch para sua feature:
-   ```bash
-   git checkout -b feature/nova-feature
-   ```
-3. Faça commit das suas alterações:
-   ```bash
-   git commit -m 'Add: nova feature'
-   ```
-4. Faça push para a branch:
-   ```bash
-   git push origin feature/nova-feature
-   ```
-5. Abra um **Pull Request** e descreva suas alterações
-
-### Padrões de Commit
-
-- `Add:` para novas funcionalidades
-- `Fix:` para correções de bugs
-- `Docs:` para atualizações de documentação
-- `Refactor:` para refatorações de código
-- `Style:` para alterações de estilo/formatação
+1. Fork o projeto.
+2. Crie sua branch (`git checkout -b feature/AmazingFeature`).
+3. Commit suas mudanças (`git commit -m 'feat: Add some AmazingFeature'`).
+4. Push para a branch (`git push origin feature/AmazingFeature`).
+5. Abra um Pull Request.
 
 ---
 
 ## 📜 Licença
 
-Este projeto está licenciado sob a **Licença MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Este projeto está licenciado sob a **Licença MIT**.
 
 ---
 
 <div align="center">
-  
-  Desenvolvido com ❤️ por [JonJonesBR](https://github.com/JonJonesBR)
-  
-  ⭐ Se este projeto te ajudou, considere dar uma estrela!
-  
+  Desenvolvido com excelência por <b>JonJonesBR</b>
 </div>
