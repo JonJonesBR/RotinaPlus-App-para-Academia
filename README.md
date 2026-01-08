@@ -21,6 +21,20 @@ O **RotinaPlus** é um aplicativo robusto e inovador desenvolvido para moderniza
 
 O app foca na segurança dos dados (armazenamento local criptografado), facilidade de compartilhamento (QR Codes offline) e usabilidade premium.
 
+
+---
+
+## 📱 Screenshots
+
+<div align="center">
+  <img src="assets/showcase_login.png" width="200" alt="Tela de Login" />
+  <img src="assets/showcase_prof.png" width="200" alt="Painel do Professor" />
+  <img src="assets/showcase_aluno.png" width="200" alt="Painel do Aluno" />
+  <img src="assets/showcase_qrsync.png" width="200" alt="QR Sync" />
+</div>
+
+> *Interface moderna, intuitiva e em Dark Mode para economizar bateria.*
+
 ---
 
 ## ✨ Funcionalidades Principais
