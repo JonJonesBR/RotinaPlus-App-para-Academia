@@ -47,11 +47,11 @@
     "plugins": [
       "expo-barcode-scanner",
       "expo-secure-store"
-    ]
-  },
-  "notifications": {
-    "icon": "./assets/notification-icon.png",
-    "color": "#FFFFFF",
-    "androidMode": "default"
+    ],
+    "notification": {
+      "icon": "./assets/notification-icon.png",
+      "color": "#FFFFFF",
+      "androidMode": "default"
+    }
   }
 }

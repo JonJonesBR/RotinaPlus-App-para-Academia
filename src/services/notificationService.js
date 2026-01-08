@@ -2,18 +2,30 @@
  * NotificationService - Serviço de Notificações Locais
  * 
  * Gerencia lembretes de treino e pagamentos
+ * Nota: Notificações push não funcionam no Expo Go (SDK 53+)
+ * Para funcionalidade completa, use development build
  */
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
+import Constants from 'expo-constants';
 
-// Configuração padrão de notificações
-Notifications.setNotificationHandler({
-    handleNotification: async () => ({
-        shouldShowAlert: true,
-        shouldPlaySound: true,
-        shouldSetBadge: true,
-    }),
-});
+// Verifica se está rodando no Expo Go
+const isExpoGo = Constants.appOwnership === 'expo';
+
+// Configuração padrão de notificações (apenas se não for Expo Go)
+if (!isExpoGo) {
+    try {
+        Notifications.setNotificationHandler({
+            handleNotification: async () => ({
+                shouldShowAlert: true,
+                shouldPlaySound: true,
+                shouldSetBadge: true,
+            }),
+        });
+    } catch (error) {
+        console.log('Notifications not available in Expo Go');
+    }
+}
 
 export const NotificationService = {
     /**
@@ -21,6 +33,12 @@ export const NotificationService = {
      * @returns {Promise<boolean>} Se tem permissão
      */
     async requestPermissions() {
+        // Notificações não funcionam completas no Expo Go
+        if (isExpoGo) {
+            console.log('Notifications limited in Expo Go - use dev build for full support');
+            return false;
+        }
+
         try {
             const { status: existingStatus } = await Notifications.getPermissionsAsync();
             let finalStatus = existingStatus;

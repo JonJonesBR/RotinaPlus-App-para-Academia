@@ -36,6 +36,63 @@ const PIX_KEY_OPTIONS = [
     { value: PixKeyType.RANDOM, label: 'Aleatória', icon: 'vpn-key' },
 ];
 
+// InputField definido FORA do componente principal para evitar re-renderização
+const InputField = ({
+    label,
+    value,
+    onChangeText,
+    error,
+    placeholder,
+    keyboardType = 'default',
+    autoCapitalize = 'sentences',
+    inputRef,
+    onSubmitEditing,
+    returnKeyType = 'next',
+    icon,
+    colors,
+}) => (
+    <View style={styles.inputContainer}>
+        <Text style={[styles.label, { color: colors.text.secondary }]}>
+            {label}
+        </Text>
+        <View
+            style={[
+                styles.inputWrapper,
+                {
+                    backgroundColor: colors.surface,
+                    borderColor: error ? colors.danger : colors.border,
+                },
+            ]}
+        >
+            {icon && (
+                <Icon
+                    name={icon}
+                    size={20}
+                    color={colors.text.disabled}
+                    style={styles.inputIcon}
+                />
+            )}
+            <TextInput
+                ref={inputRef}
+                style={[styles.input, { color: colors.text.primary }]}
+                value={value}
+                onChangeText={onChangeText}
+                placeholder={placeholder}
+                placeholderTextColor={colors.text.hint}
+                keyboardType={keyboardType}
+                autoCapitalize={autoCapitalize}
+                onSubmitEditing={onSubmitEditing}
+                returnKeyType={returnKeyType}
+            />
+        </View>
+        {error && (
+            <Text style={[styles.errorText, { color: colors.danger }]}>
+                {error}
+            </Text>
+        )}
+    </View>
+);
+
 export default function ProfessorRegistrationScreen({ navigation }) {
     const { colors, shadows } = useTheme();
 
@@ -149,70 +206,18 @@ export default function ProfessorRegistrationScreen({ navigation }) {
         }
     };
 
-    const InputField = ({
-        label,
-        value,
-        onChangeText,
-        error,
-        placeholder,
-        keyboardType = 'default',
-        autoCapitalize = 'sentences',
-        inputRef,
-        onSubmitEditing,
-        returnKeyType = 'next',
-        icon,
-    }) => (
-        <View style={styles.inputContainer}>
-            <Text style={[styles.label, { color: colors.text.secondary }]}>
-                {label}
-            </Text>
-            <View
-                style={[
-                    styles.inputWrapper,
-                    {
-                        backgroundColor: colors.surface,
-                        borderColor: error ? colors.danger : colors.border,
-                    },
-                ]}
-            >
-                {icon && (
-                    <Icon
-                        name={icon}
-                        size={20}
-                        color={colors.text.disabled}
-                        style={styles.inputIcon}
-                    />
-                )}
-                <TextInput
-                    ref={inputRef}
-                    style={[styles.input, { color: colors.text.primary }]}
-                    value={value}
-                    onChangeText={onChangeText}
-                    placeholder={placeholder}
-                    placeholderTextColor={colors.text.hint}
-                    keyboardType={keyboardType}
-                    autoCapitalize={autoCapitalize}
-                    onSubmitEditing={onSubmitEditing}
-                    returnKeyType={returnKeyType}
-                />
-            </View>
-            {error && (
-                <Text style={[styles.errorText, { color: colors.danger }]}>
-                    {error}
-                </Text>
-            )}
-        </View>
-    );
-
     return (
         <KeyboardAvoidingView
-            style={{ flex: 1 }}
-            behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+            style={{ flex: 1, backgroundColor: colors.background }}
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
         >
             <ScrollView
                 style={[styles.container, { backgroundColor: colors.background }]}
                 contentContainerStyle={styles.content}
                 showsVerticalScrollIndicator={false}
+                keyboardShouldPersistTaps="handled"
+                keyboardDismissMode="interactive"
             >
                 {/* Header */}
                 <View style={styles.header}>
@@ -236,6 +241,7 @@ export default function ProfessorRegistrationScreen({ navigation }) {
                         error={errors.name}
                         placeholder="Seu nome"
                         icon="person"
+                        colors={colors}
                         onSubmitEditing={() => emailRef.current?.focus()}
                     />
 
@@ -248,6 +254,7 @@ export default function ProfessorRegistrationScreen({ navigation }) {
                         keyboardType="email-address"
                         autoCapitalize="none"
                         icon="email"
+                        colors={colors}
                         inputRef={emailRef}
                         onSubmitEditing={() => phoneRef.current?.focus()}
                     />
@@ -260,6 +267,7 @@ export default function ProfessorRegistrationScreen({ navigation }) {
                         placeholder="(00) 00000-0000"
                         keyboardType="phone-pad"
                         icon="phone"
+                        colors={colors}
                         inputRef={phoneRef}
                         onSubmitEditing={() => academyRef.current?.focus()}
                     />
@@ -270,6 +278,7 @@ export default function ProfessorRegistrationScreen({ navigation }) {
                         onChangeText={(v) => updateField('academyName', v)}
                         placeholder="Minha Academia"
                         icon="fitness-center"
+                        colors={colors}
                         inputRef={academyRef}
                         onSubmitEditing={() => pixRef.current?.focus()}
                     />
@@ -345,6 +354,7 @@ export default function ProfessorRegistrationScreen({ navigation }) {
                             }
                             autoCapitalize="none"
                             icon="pix"
+                            colors={colors}
                             inputRef={pixRef}
                             returnKeyType="done"
                         />

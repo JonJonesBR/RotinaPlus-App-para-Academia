@@ -11,7 +11,9 @@ import {
     Animated,
     Pressable,
     Dimensions,
+    ScrollView,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useTheme } from '../../theme/ThemeContext';
 import { UserRole } from '../../models/dataModels';
@@ -20,6 +22,7 @@ const { width } = Dimensions.get('window');
 
 export default function RoleSelectionScreen({ navigation }) {
     const { colors, isDark, shadows } = useTheme();
+    const insets = useSafeAreaInsets();
 
     // Animações
     const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -97,7 +100,17 @@ export default function RoleSelectionScreen({ navigation }) {
     );
 
     return (
-        <View style={[styles.container, { backgroundColor: colors.background }]}>
+        <ScrollView
+            style={[styles.container, { backgroundColor: colors.background }]}
+            contentContainerStyle={[
+                styles.scrollContent,
+                {
+                    paddingTop: insets.top + 20,
+                    paddingBottom: insets.bottom + 20,
+                }
+            ]}
+            showsVerticalScrollIndicator={false}
+        >
             {/* Header */}
             <Animated.View
                 style={[
@@ -150,15 +163,17 @@ export default function RoleSelectionScreen({ navigation }) {
                     Seus dados ficam armazenados apenas no seu dispositivo
                 </Text>
             </Animated.View>
-        </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    scrollContent: {
         paddingHorizontal: 24,
-        paddingTop: 60,
+        flexGrow: 1,
     },
     header: {
         alignItems: 'center',
