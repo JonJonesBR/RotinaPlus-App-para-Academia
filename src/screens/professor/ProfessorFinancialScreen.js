@@ -20,7 +20,7 @@ import { useTheme } from '../../theme/ThemeContext';
 import {
     UserService,
     PaymentService,
-    AlunoService
+    AlunoService,
 } from '../../services/storageService';
 import { PaymentStatus, createPayment } from '../../models/dataModels';
 import { PremiumCard, PremiumButton } from '../../components/common';
@@ -75,7 +75,7 @@ export default function ProfessorFinancialScreen({ navigation }) {
     useFocusEffect(
         useCallback(() => {
             loadData();
-        }, [])
+        }, []),
     );
 
     const onRefresh = async () => {
@@ -97,7 +97,7 @@ export default function ProfessorFinancialScreen({ navigation }) {
                         loadData();
                     },
                 },
-            ]
+            ],
         );
     };
 
@@ -106,7 +106,7 @@ export default function ProfessorFinancialScreen({ navigation }) {
 
         // Verifica se já existe pagamento para este mês
         const existing = payments.find(
-            p => p.studentId === student.id && p.month === currentMonth
+            p => p.studentId === student.id && p.month === currentMonth,
         );
 
         if (existing) {
@@ -144,7 +144,7 @@ export default function ProfessorFinancialScreen({ navigation }) {
             ],
             'plain-text',
             '',
-            'numeric'
+            'numeric',
         );
     };
 
@@ -220,7 +220,7 @@ export default function ProfessorFinancialScreen({ navigation }) {
                     <Text style={[styles.paymentMonth, { color: colors.text.secondary }]}>
                         {new Date(payment.month + '-01').toLocaleDateString('pt-BR', {
                             month: 'long',
-                            year: 'numeric'
+                            year: 'numeric',
                         })}
                     </Text>
                 </View>

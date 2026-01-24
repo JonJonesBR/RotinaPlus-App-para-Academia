@@ -91,7 +91,7 @@ export default function ProfessorQRExportScreen({ navigation, route }) {
                     // Gera QR com dados de pagamento
                     data = await QRCodeService.generatePaymentInfo(
                         { amount: 0, dueDay: 10, month: new Date().toISOString().slice(0, 7) },
-                        professor
+                        professor,
                     );
                     break;
                 default:

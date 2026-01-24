@@ -101,7 +101,7 @@ export default function ConfirmSeriesScreen({ route, navigation }) {
             text: 'Voltar ao Início',
             onPress: () => navigation.navigate('WelcomeScreen'),
           },
-        ]
+        ],
       );
     } catch (error) {
       console.error('Erro ao vincular série:', error);
@@ -128,7 +128,7 @@ export default function ConfirmSeriesScreen({ route, navigation }) {
             {
               backgroundColor: colors.surfaceVariant,
               opacity: value <= min ? 0.4 : pressed ? 0.7 : 1,
-            }
+            },
           ]}
         >
           <Icon name="remove" size={24} color={colors.text.primary} />
@@ -143,7 +143,7 @@ export default function ConfirmSeriesScreen({ route, navigation }) {
             {
               backgroundColor: colors.primary,
               opacity: pressed ? 0.7 : 1,
-            }
+            },
           ]}
         >
           <Icon name="add" size={24} color={colors.text.inverse} />
@@ -218,7 +218,7 @@ export default function ConfirmSeriesScreen({ route, navigation }) {
               style={[
                 styles.exerciseItem,
                 index < series.exercises.length - 1 && styles.exerciseItemBorder,
-                { borderBottomColor: colors.divider }
+                { borderBottomColor: colors.divider },
               ]}
             >
               <View style={[styles.exerciseNumber, { backgroundColor: colors.primarySurface }]}>

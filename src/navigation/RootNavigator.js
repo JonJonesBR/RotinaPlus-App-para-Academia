@@ -52,7 +52,7 @@ function BackButton({ navigation, colors }) {
       onPress={() => navigation.goBack()}
       style={({ pressed }) => [
         styles.headerButton,
-        pressed && { opacity: 0.6 }
+        pressed && { opacity: 0.6 },
       ]}
     >
       <Icon name="arrow-back" size={24} color={colors.text.primary} />
@@ -69,7 +69,7 @@ function SettingsButton({ navigation, colors, route }) {
       onPress={() => navigation.navigate(route)}
       style={({ pressed }) => [
         styles.headerButton,
-        pressed && { opacity: 0.6 }
+        pressed && { opacity: 0.6 },
       ]}
     >
       <Icon name="settings" size={24} color={colors.text.primary} />

@@ -173,7 +173,7 @@ export default function PinLockScreen({
             <Animated.View
                 style={[
                     styles.pinContainer,
-                    { transform: [{ translateX: shakeAnim }] }
+                    { transform: [{ translateX: shakeAnim }] },
                 ]}
             >
                 {[...Array(PIN_LENGTH)].map((_, i) => (

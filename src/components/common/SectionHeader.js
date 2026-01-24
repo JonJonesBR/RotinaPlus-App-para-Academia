@@ -42,7 +42,7 @@ export default function SectionHeader({
                     onPress={onAction}
                     style={({ pressed }) => [
                         styles.action,
-                        pressed && { opacity: 0.7 }
+                        pressed && { opacity: 0.7 },
                     ]}
                 >
                     {action && (

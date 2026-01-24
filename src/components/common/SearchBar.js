@@ -62,7 +62,7 @@ export default function SearchBar({
                     borderWidth: 2,
                     borderColor,
                 },
-                style
+                style,
             ]}
         >
             <Icon
@@ -79,7 +79,7 @@ export default function SearchBar({
                 placeholderTextColor={colors.text.hint}
                 style={[
                     styles.input,
-                    { color: colors.text.primary }
+                    { color: colors.text.primary },
                 ]}
                 onFocus={handleFocus}
                 onBlur={handleBlur}

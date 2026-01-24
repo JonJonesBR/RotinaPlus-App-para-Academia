@@ -105,7 +105,7 @@ export default function WelcomeScreen({ navigation }) {
             {
               opacity: fadeAnim,
               transform: [{ translateY: slideAnim }],
-            }
+            },
           ]}
         >
           <View style={styles.headerTop}>
@@ -132,7 +132,7 @@ export default function WelcomeScreen({ navigation }) {
             {
               opacity: fadeAnim,
               transform: [{ translateY: slideAnim }],
-            }
+            },
           ]}
         >
           <PremiumCard

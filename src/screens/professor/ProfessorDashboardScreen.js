@@ -20,7 +20,7 @@ import {
     UserService,
     AlunoService,
     PaymentService,
-    WorkoutService
+    WorkoutService,
 } from '../../services/storageService';
 import { PaymentStatus } from '../../models/dataModels';
 import {
@@ -86,7 +86,7 @@ export default function ProfessorDashboardScreen({ navigation }) {
     useFocusEffect(
         useCallback(() => {
             loadData();
-        }, [])
+        }, []),
     );
 
     const onRefresh = async () => {

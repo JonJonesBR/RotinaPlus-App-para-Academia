@@ -8,11 +8,11 @@ module.exports = function(api) {
   return {
     // Presets do Babel
     presets: [
-      'babel-preset-expo' // Preset do Expo
+      'babel-preset-expo', // Preset do Expo
     ],
     // Plugins do Babel
     plugins: [
-      'react-native-reanimated/plugin' // Plugin do react-native-reanimated
-    ]
+      'react-native-reanimated/plugin', // Plugin do react-native-reanimated
+    ],
   };
 };

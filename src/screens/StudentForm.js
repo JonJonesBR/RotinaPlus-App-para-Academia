@@ -278,7 +278,7 @@ export default function StudentForm({ route, navigation }) {
                       color: formData.frequencyDays.includes(day.id)
                         ? colors.text.inverse
                         : colors.text.primary,
-                    }
+                    },
                   ]}>
                     {day.short}
                   </Text>

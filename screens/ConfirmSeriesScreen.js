@@ -64,7 +64,7 @@ export default function ConfirmSeriesScreen({ route, navigation }) {
             text: 'OK',
             onPress: () => navigation.navigate('WelcomeScreen'), // Redireciona para WelcomeScreen
           },
-        ]
+        ],
       );
     } catch (error) {
       console.error('Erro ao vincular série:', error);

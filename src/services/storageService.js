@@ -9,7 +9,7 @@
  * - PaymentService: Mensalidades e pagamentos
  */
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { UserRole, PaymentStatus } from '../models/dataModels';
+import { PaymentStatus } from '../models/dataModels';
 
 // ============================================
 // CHAVES DE ARMAZENAMENTO
@@ -214,7 +214,7 @@ export const AlunoService = {
     async getByProfessorId(professorId) {
         const alunos = await this.getAll();
         return alunos.filter(a =>
-            a.professors.some(p => p.id === professorId)
+            a.professors.some(p => p.id === professorId),
         );
     },
 
@@ -529,12 +529,41 @@ export const LegacyService = {
      * TODO: Implementar migração completa se necessário
      */
     async migrateLegacyData() {
-        // Por enquanto apenas verificamos
-        const hasLegacy = await this.hasLegacyData();
-        if (hasLegacy) {
-            console.log('Dados legados encontrados - migração pendente');
+        try {
+            const hasLegacy = await this.hasLegacyData();
+            if (!hasLegacy) return false;
+
+            // 1. Ler dados antigos
+            const legacyData = await AsyncStorage.getItem(STORAGE_KEYS.STUDENTS);
+            const students = JSON.parse(legacyData);
+
+            if (!Array.isArray(students)) return false;
+
+            // 2. Salvar no novo formato
+            // Optamos por salvar direto para evitar overhead de chamar save() N vezes
+            // Mas verificamos se já existem dados novos para não sobrescrever
+            const currentAlunos = await AlunoService.getAll();
+
+            // Mesclar: evitar duplicatas por ID
+            const newIds = new Set(currentAlunos.map(a => a.id));
+            const toAdd = students.filter(s => !newIds.has(s.id));
+
+            if (toAdd.length > 0) {
+                const merged = [...currentAlunos, ...toAdd];
+                await setStorageItem(STORAGE_KEYS.ALUNOS, merged);
+            }
+
+            // 3. Remover dados antigos (ou renomear para backup)
+            await AsyncStorage.removeItem(STORAGE_KEYS.STUDENTS);
+            // Opcional: Backup
+            // await AsyncStorage.setItem('@students_backup', legacyData);
+
+            console.log(`Migração concluída: ${toAdd.length} alunos migrados.`);
+            return true;
+        } catch (error) {
+            console.error('Erro na migração:', error);
+            return false;
         }
-        return hasLegacy;
     },
 };
 

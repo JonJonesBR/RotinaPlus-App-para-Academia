@@ -124,7 +124,7 @@ export default function AlunoSettingsScreen({ navigation }) {
                         loadData();
                     },
                 },
-            ]
+            ],
         );
     };
 
@@ -145,7 +145,7 @@ export default function AlunoSettingsScreen({ navigation }) {
                         });
                     },
                 },
-            ]
+            ],
         );
     };
 
@@ -284,7 +284,7 @@ export default function AlunoSettingsScreen({ navigation }) {
                                 style={[
                                     styles.professorRow,
                                     { borderBottomColor: colors.border },
-                                    index === aluno.professors.length - 1 && { borderBottomWidth: 0 }
+                                    index === aluno.professors.length - 1 && { borderBottomWidth: 0 },
                                 ]}
                             >
                                 <Avatar name={prof.name} size={40} />

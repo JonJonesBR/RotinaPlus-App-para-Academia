@@ -103,7 +103,7 @@ export default function AlunoQRImportScreen({ navigation }) {
                         navigation.goBack();
                     },
                 },
-            ]
+            ],
         );
     };
 
@@ -132,7 +132,7 @@ export default function AlunoQRImportScreen({ navigation }) {
                         navigation.goBack();
                     },
                 },
-            ]
+            ],
         );
     };
 
@@ -142,7 +142,7 @@ export default function AlunoQRImportScreen({ navigation }) {
         Alert.alert(
             'Dados de Pagamento',
             `Professor: ${pix.name}\nChave PIX: ${pix.key}\n\nEsses dados foram salvos para facilitar seus pagamentos.`,
-            [{ text: 'OK', onPress: () => navigation.goBack() }]
+            [{ text: 'OK', onPress: () => navigation.goBack() }],
         );
     };
 
@@ -221,7 +221,7 @@ export default function AlunoQRImportScreen({ navigation }) {
                         <TextInput
                             style={[styles.codeInput, {
                                 backgroundColor: colors.surfaceVariant,
-                                color: colors.text.primary
+                                color: colors.text.primary,
                             }]}
                             value={manualCode}
                             onChangeText={setManualCode}

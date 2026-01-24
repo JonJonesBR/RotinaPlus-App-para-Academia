@@ -15,7 +15,7 @@ import {
     Text,
     View,
     ActivityIndicator,
-    Animated
+    Animated,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useTheme } from '../../theme/ThemeContext';

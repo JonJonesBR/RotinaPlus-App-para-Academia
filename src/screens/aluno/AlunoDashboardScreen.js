@@ -18,7 +18,7 @@ import { useTheme } from '../../theme/ThemeContext';
 import {
     UserService,
     WorkoutService,
-    PaymentService
+    PaymentService,
 } from '../../services/storageService';
 import { PaymentStatus, WEEK_DAYS } from '../../models/dataModels';
 import {
@@ -70,7 +70,7 @@ export default function AlunoDashboardScreen({ navigation }) {
     useFocusEffect(
         useCallback(() => {
             loadData();
-        }, [])
+        }, []),
     );
 
     const onRefresh = async () => {
@@ -173,7 +173,7 @@ export default function AlunoDashboardScreen({ navigation }) {
                         <PremiumButton
                             title="Iniciar Treino"
                             onPress={() => navigation.navigate('AlunoWorkoutDetail', {
-                                workoutId: todayWorkout.id
+                                workoutId: todayWorkout.id,
                             })}
                             icon="play-arrow"
                         />
@@ -194,7 +194,7 @@ export default function AlunoDashboardScreen({ navigation }) {
                     <PremiumCard
                         style={[
                             styles.paymentCard,
-                            { borderLeftWidth: 4, borderLeftColor: getPaymentStatusColor() }
+                            { borderLeftWidth: 4, borderLeftColor: getPaymentStatusColor() },
                         ]}
                     >
                         <View style={styles.paymentHeader}>

@@ -22,7 +22,7 @@ export const CryptoService = {
     async hashData(data) {
         const digest = await Crypto.digestStringAsync(
             Crypto.CryptoDigestAlgorithm.SHA256,
-            data
+            data,
         );
         return digest;
     },

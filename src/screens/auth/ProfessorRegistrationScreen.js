@@ -23,7 +23,7 @@ import {
     createProfessor,
     PixKeyType,
     UserRole,
-    validators
+    validators,
 } from '../../models/dataModels';
 import { ProfessorService, UserService } from '../../services/storageService';
 import { PremiumButton } from '../../components/common';
@@ -196,7 +196,7 @@ export default function ProfessorRegistrationScreen({ navigation }) {
                             routes: [{ name: 'ProfessorDashboard' }],
                         }),
                     },
-                ]
+                ],
             );
         } catch (error) {
             console.error('Erro ao cadastrar:', error);

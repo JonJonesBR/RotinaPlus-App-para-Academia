@@ -37,7 +37,7 @@ export default function AlunoFinancialScreen({ navigation }) {
             if (user) {
                 const allPayments = await PaymentService.getByStudentId(user.id);
                 setPayments(allPayments.sort((a, b) =>
-                    new Date(b.month) - new Date(a.month)
+                    new Date(b.month) - new Date(a.month),
                 ));
             }
         } catch (error) {
@@ -48,7 +48,7 @@ export default function AlunoFinancialScreen({ navigation }) {
     useFocusEffect(
         useCallback(() => {
             loadData();
-        }, [])
+        }, []),
     );
 
     const onRefresh = async () => {
@@ -70,7 +70,7 @@ export default function AlunoFinancialScreen({ navigation }) {
 
     const getNextPayment = () => {
         return payments.find(p =>
-            p.status === PaymentStatus.PENDING || p.status === PaymentStatus.OVERDUE
+            p.status === PaymentStatus.PENDING || p.status === PaymentStatus.OVERDUE,
         );
     };
 
@@ -109,7 +109,7 @@ export default function AlunoFinancialScreen({ navigation }) {
             `Valor: R$ ${payment?.amount?.toFixed(2) || '0.00'}\n\nAbra seu app de banco e cole a chave PIX para pagar.`,
             [
                 { text: 'OK' },
-            ]
+            ],
         );
     };
 
@@ -163,8 +163,8 @@ export default function AlunoFinancialScreen({ navigation }) {
                         {
                             borderLeftWidth: 4,
                             borderLeftColor: daysUntilDue < 0 ? colors.danger :
-                                daysUntilDue <= 3 ? colors.warning : colors.success
-                        }
+                                daysUntilDue <= 3 ? colors.warning : colors.success,
+                        },
                     ]}
                 >
                     <View style={styles.nextPaymentHeader}>
@@ -180,8 +180,8 @@ export default function AlunoFinancialScreen({ navigation }) {
                             styles.dueTag,
                             {
                                 backgroundColor: daysUntilDue < 0 ? colors.danger :
-                                    daysUntilDue <= 3 ? colors.warning : colors.primary
-                            }
+                                    daysUntilDue <= 3 ? colors.warning : colors.primary,
+                            },
                         ]}>
                             <Text style={styles.dueTagText}>
                                 {daysUntilDue < 0
@@ -199,7 +199,7 @@ export default function AlunoFinancialScreen({ navigation }) {
                         <Text style={[styles.nextPaymentDate, { color: colors.text.secondary }]}>
                             Dia {nextPayment.dueDay} de{' '}
                             {new Date(nextPayment.month + '-01').toLocaleDateString('pt-BR', {
-                                month: 'long'
+                                month: 'long',
                             })}
                         </Text>
                     </View>
@@ -258,7 +258,7 @@ export default function AlunoFinancialScreen({ navigation }) {
                                 <Text style={[styles.paymentMonth, { color: colors.text.primary }]}>
                                     {new Date(payment.month + '-01').toLocaleDateString('pt-BR', {
                                         month: 'long',
-                                        year: 'numeric'
+                                        year: 'numeric',
                                     })}
                                 </Text>
                                 <Text style={[styles.paymentAmount, { color: colors.text.secondary }]}>
@@ -267,7 +267,7 @@ export default function AlunoFinancialScreen({ navigation }) {
                             </View>
                             <View style={[
                                 styles.statusBadge,
-                                { backgroundColor: getStatusColor(payment.status) + '20' }
+                                { backgroundColor: getStatusColor(payment.status) + '20' },
                             ]}>
                                 <Icon
                                     name={payment.status === PaymentStatus.PAID ? 'check-circle' : 'schedule'}

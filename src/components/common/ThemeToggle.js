@@ -14,7 +14,7 @@ import { useTheme, ThemeMode } from '../../theme/ThemeContext';
 export default function ThemeToggle({
     showLabel = false,
     size = 'md', // 'sm' | 'md' | 'lg'
-    style
+    style,
 }) {
     const { colors, isDark, themeMode, setTheme, toggleTheme, borderRadius } = useTheme();
     const rotateAnim = React.useRef(new Animated.Value(isDark ? 1 : 0)).current;
@@ -60,7 +60,7 @@ export default function ThemeToggle({
                 onPress={toggleTheme}
                 style={({ pressed }) => [
                     buttonStyle,
-                    pressed && { opacity: 0.8, transform: [{ scale: 0.95 }] }
+                    pressed && { opacity: 0.8, transform: [{ scale: 0.95 }] },
                 ]}
             >
                 <Animated.View style={{ transform: [{ rotate: rotation }] }}>

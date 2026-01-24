@@ -21,6 +21,7 @@ import {
   Pressable,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AlunoService, LegacyService } from '../services/storageService';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useTheme } from '../theme/ThemeContext';
 import {
@@ -57,6 +58,11 @@ export default function StudentManagementScreen({ navigation }) {
       loadStudents();
     });
 
+    // Tenta migrar dados antigos ao carregar a tela
+    LegacyService.migrateLegacyData().then((migrated) => {
+      if (migrated) loadStudents();
+    });
+
     // Animar FAB entrada
     Animated.spring(fabAnim, {
       toValue: 1,
@@ -70,13 +76,11 @@ export default function StudentManagementScreen({ navigation }) {
 
   const loadStudents = async () => {
     try {
-      const storedStudents = await AsyncStorage.getItem('@students');
-      if (storedStudents) {
-        const sortedStudents = JSON.parse(storedStudents).sort((a, b) =>
-          a.name.localeCompare(b.name)
-        );
-        setStudents(sortedStudents);
-      }
+      const allStudents = await AlunoService.getAll();
+      const sortedStudents = allStudents.sort((a, b) =>
+        a.name.localeCompare(b.name),
+      );
+      setStudents(sortedStudents);
     } catch (error) {
       console.error('Erro ao carregar alunos:', error);
     }
@@ -89,7 +93,7 @@ export default function StudentManagementScreen({ navigation }) {
     return students.filter(
       student =>
         student.name.toLowerCase().includes(query) ||
-        student.cpf?.includes(query)
+        student.cpf?.includes(query),
     );
   }, [students, searchQuery]);
 
@@ -103,12 +107,11 @@ export default function StudentManagementScreen({ navigation }) {
           text: 'Excluir',
           style: 'destructive',
           onPress: async () => {
-            const updatedStudents = students.filter((s) => s.id !== student.id);
-            await AsyncStorage.setItem('@students', JSON.stringify(updatedStudents));
-            setStudents(updatedStudents);
+            await AlunoService.delete(student.id);
+            loadStudents();
           },
         },
-      ]
+      ],
     );
   };
 
@@ -119,18 +122,15 @@ export default function StudentManagementScreen({ navigation }) {
         text: 'Excluir',
         style: 'destructive',
         onPress: async () => {
-          const updatedStudents = students.map((student) => {
-            if (student.id === studentId) {
-              const updatedExercises = student.linkedExercises.filter(
-                (exercise) => exercise.id !== exerciseId
-              );
-              return { ...student, linkedExercises: updatedExercises };
-            }
-            return student;
-          });
-
-          await AsyncStorage.setItem('@students', JSON.stringify(updatedStudents));
-          setStudents(updatedStudents);
+          const student = students.find((s) => s.id === studentId);
+          if (student) {
+            const updatedExercises = student.linkedExercises.filter(
+              (exercise) => exercise.id !== exerciseId,
+            );
+            // O AlunoService.save atualiza se o ID já existir
+            await AlunoService.save({ ...student, linkedExercises: updatedExercises });
+            loadStudents();
+          }
         },
       },
     ]);
@@ -370,10 +370,10 @@ export default function StudentManagementScreen({ navigation }) {
                 translateY: fabAnim.interpolate({
                   inputRange: [0, 1],
                   outputRange: [100, 0],
-                })
-              }
+                }),
+              },
             ],
-          }
+          },
         ]}
       >
         <Pressable

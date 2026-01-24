@@ -6,7 +6,7 @@ module.exports = {
         'plugin:react-hooks/recommended',
         'prettier',
     ],
-    plugins: ['react', 'react-hooks', 'react-native'],
+    plugins: ['react', 'react-hooks'],
     parserOptions: {
         ecmaFeatures: {
             jsx: true,
@@ -15,9 +15,9 @@ module.exports = {
         sourceType: 'module',
     },
     env: {
-        'react-native/react-native': true,
         es2021: true,
         node: true,
+        jest: true,
     },
     settings: {
         react: {

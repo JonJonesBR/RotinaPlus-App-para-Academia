@@ -48,7 +48,7 @@ export default function SeriesFormScreen({ route, navigation }) {
 
       const updatedPlans = series
         ? customPlans.map((plan) =>
-            plan.id === series.id ? newSeries : plan
+            plan.id === series.id ? newSeries : plan,
           )
         : [...customPlans, newSeries];
 
@@ -64,7 +64,7 @@ export default function SeriesFormScreen({ route, navigation }) {
               navigation.navigate('ExerciseLog', { refresh: true });
             },
           },
-        ]
+        ],
       );
     } catch (error) {
       console.error('Erro ao salvar a série:', error);

@@ -21,7 +21,7 @@ import {
     PremiumCard,
     SearchBar,
     Avatar,
-    EmptyState
+    EmptyState,
 } from '../../components/common';
 
 export default function ProfessorStudentsScreen({ navigation }) {
@@ -52,7 +52,7 @@ export default function ProfessorStudentsScreen({ navigation }) {
     useFocusEffect(
         useCallback(() => {
             loadData();
-        }, [])
+        }, []),
     );
 
     const onRefresh = async () => {
@@ -68,7 +68,7 @@ export default function ProfessorStudentsScreen({ navigation }) {
         } else {
             const filtered = students.filter(s =>
                 s.name.toLowerCase().includes(query.toLowerCase()) ||
-                s.email?.toLowerCase().includes(query.toLowerCase())
+                s.email?.toLowerCase().includes(query.toLowerCase()),
             );
             setFilteredStudents(filtered);
         }
@@ -91,7 +91,7 @@ export default function ProfessorStudentsScreen({ navigation }) {
                         loadData();
                     },
                 },
-            ]
+            ],
         );
     };
 
@@ -149,7 +149,7 @@ export default function ProfessorStudentsScreen({ navigation }) {
                         style={[styles.actionButton, { backgroundColor: colors.secondary }]}
                         onPress={() => navigation.navigate('ProfessorQRExport', {
                             type: 'workout',
-                            studentId: student.id
+                            studentId: student.id,
                         })}
                     >
                         <Icon name="qr-code" size={18} color="#FFFFFF" />

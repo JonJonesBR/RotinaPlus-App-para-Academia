@@ -69,7 +69,7 @@ export default function RoleSelectionScreen({ navigation }) {
         title,
         description,
         scaleAnim,
-        gradient
+        gradient,
     }) => (
         <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
             <Pressable
@@ -107,7 +107,7 @@ export default function RoleSelectionScreen({ navigation }) {
                 {
                     paddingTop: insets.top + 20,
                     paddingBottom: insets.bottom + 20,
-                }
+                },
             ]}
             showsVerticalScrollIndicator={false}
         >

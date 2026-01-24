@@ -74,7 +74,7 @@ export default function SeriesFormScreen({ route, navigation }) {
       Alert.alert(
         'Atenção',
         'Adicione pelo menos um exercício à série.',
-        [{ text: 'OK' }]
+        [{ text: 'OK' }],
       );
       return;
     }
@@ -115,7 +115,7 @@ export default function SeriesFormScreen({ route, navigation }) {
         {
           backgroundColor: colors.surfaceVariant,
           borderLeftColor: colors.primary,
-        }
+        },
       ]}
     >
       <View style={styles.exerciseContent}>
@@ -132,7 +132,7 @@ export default function SeriesFormScreen({ route, navigation }) {
         onPress={() => handleDeleteExercise(index)}
         style={({ pressed }) => [
           styles.deleteButton,
-          pressed && { opacity: 0.6 }
+          pressed && { opacity: 0.6 },
         ]}
       >
         <Icon name="close" size={20} color={colors.danger} />
@@ -228,7 +228,7 @@ export default function SeriesFormScreen({ route, navigation }) {
                   styles.addButton,
                   { backgroundColor: colors.primary },
                   pressed && { opacity: 0.8 },
-                  !newExercise.trim() && { opacity: 0.5 }
+                  !newExercise.trim() && { opacity: 0.5 },
                 ]}
                 disabled={!newExercise.trim()}
               >

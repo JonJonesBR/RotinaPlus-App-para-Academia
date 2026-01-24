@@ -143,7 +143,7 @@ export default function AlunoWorkoutDetailScreen({ navigation, route }) {
                             backgroundColor: colors.successLight,
                             borderLeftWidth: 4,
                             borderLeftColor: colors.success,
-                        }
+                        },
                     ]}
                 >
                     <View style={styles.exerciseHeader}>
@@ -153,7 +153,7 @@ export default function AlunoWorkoutDetailScreen({ navigation, route }) {
                                 {
                                     backgroundColor: isCompleted ? colors.success : 'transparent',
                                     borderColor: isCompleted ? colors.success : colors.border,
-                                }
+                                },
                             ]}>
                                 {isCompleted && (
                                     <Icon name="check" size={18} color="#FFFFFF" />
@@ -165,7 +165,7 @@ export default function AlunoWorkoutDetailScreen({ navigation, route }) {
                                     {
                                         color: colors.text.primary,
                                         textDecorationLine: isCompleted ? 'line-through' : 'none',
-                                    }
+                                    },
                                 ]}>
                                     {exercise.name}
                                 </Text>
@@ -184,8 +184,8 @@ export default function AlunoWorkoutDetailScreen({ navigation, route }) {
                                 style={[
                                     styles.timerButton,
                                     {
-                                        backgroundColor: isTimerActive ? colors.primary : colors.surfaceVariant
-                                    }
+                                        backgroundColor: isTimerActive ? colors.primary : colors.surfaceVariant,
+                                    },
                                 ]}
                                 onPress={() => {
                                     if (isTimerActive) {
@@ -202,7 +202,7 @@ export default function AlunoWorkoutDetailScreen({ navigation, route }) {
                                 />
                                 <Text style={[
                                     styles.timerText,
-                                    { color: isTimerActive ? '#FFFFFF' : colors.text.secondary }
+                                    { color: isTimerActive ? '#FFFFFF' : colors.text.secondary },
                                 ]}>
                                     {isTimerActive ? formatTime(timerSeconds) : `${exercise.rest || 60}s`}
                                 </Text>
@@ -239,7 +239,7 @@ export default function AlunoWorkoutDetailScreen({ navigation, route }) {
                     <Animated.View
                         style={[
                             styles.progressBar,
-                            { backgroundColor: colors.success, width: progressWidth }
+                            { backgroundColor: colors.success, width: progressWidth },
                         ]}
                     />
                 </View>

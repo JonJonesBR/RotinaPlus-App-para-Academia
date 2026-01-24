@@ -101,7 +101,7 @@ export default function ExerciseLogScreen({ navigation, route }) {
             setCustomPlans(updatedPlans);
           },
         },
-      ]
+      ],
     );
   };
 
@@ -110,7 +110,7 @@ export default function ExerciseLogScreen({ navigation, route }) {
       Alert.alert(
         'Selecione um Aluno',
         'Por favor, selecione um aluno antes de vincular uma série.',
-        [{ text: 'OK' }]
+        [{ text: 'OK' }],
       );
       return;
     }
@@ -143,7 +143,7 @@ export default function ExerciseLogScreen({ navigation, route }) {
         <Text
           style={[
             styles.studentItemName,
-            { color: isSelected ? colors.text.inverse : colors.text.primary }
+            { color: isSelected ? colors.text.inverse : colors.text.primary },
           ]}
           numberOfLines={1}
         >

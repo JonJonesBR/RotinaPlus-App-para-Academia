@@ -122,7 +122,7 @@ export const QRCodeService = {
             const { signature, ...dataWithoutSignature } = decoded;
             const isValid = await CryptoService.verifySignature(
                 dataWithoutSignature.payload,
-                signature
+                signature,
             );
 
             if (!isValid) {

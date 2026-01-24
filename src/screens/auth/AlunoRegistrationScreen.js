@@ -21,12 +21,12 @@ import {
     createAluno,
     createProfessorRef,
     UserRole,
-    validators
+    validators,
 } from '../../models/dataModels';
 import {
     AlunoService,
     ProfessorService,
-    UserService
+    UserService,
 } from '../../services/storageService';
 import { PremiumButton } from '../../components/common';
 
@@ -150,7 +150,7 @@ export default function AlunoRegistrationScreen({ navigation }) {
         if (!professor) {
             setErrors(prev => ({
                 ...prev,
-                professorCode: 'Professor não encontrado. Verifique o código.'
+                professorCode: 'Professor não encontrado. Verifique o código.',
             }));
         } else {
             setErrors(prev => ({ ...prev, professorCode: null }));
@@ -234,7 +234,7 @@ export default function AlunoRegistrationScreen({ navigation }) {
                             routes: [{ name: 'AlunoDashboard' }],
                         }),
                     },
-                ]
+                ],
             );
         } catch (error) {
             console.error('Erro ao cadastrar:', error);

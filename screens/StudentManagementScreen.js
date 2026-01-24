@@ -20,7 +20,7 @@ export default function StudentManagementScreen({ navigation }) {
       const storedStudents = await AsyncStorage.getItem('@students');
       if (storedStudents) {
         const sortedStudents = JSON.parse(storedStudents).sort((a, b) =>
-          a.name.localeCompare(b.name)
+          a.name.localeCompare(b.name),
         );
         setStudents(sortedStudents);
       }
@@ -60,7 +60,7 @@ export default function StudentManagementScreen({ navigation }) {
           const updatedStudents = students.map((student) => {
             if (student.id === studentId) {
               const updatedExercises = student.linkedExercises.filter(
-                (exercise) => exercise.id !== exerciseId
+                (exercise) => exercise.id !== exerciseId,
               );
               return { ...student, linkedExercises: updatedExercises };
             }

@@ -128,7 +128,7 @@ export default function ProfessorSettingsScreen({ navigation }) {
                         });
                     },
                 },
-            ]
+            ],
         );
     };
 
@@ -145,11 +145,11 @@ export default function ProfessorSettingsScreen({ navigation }) {
                         Alert.alert(
                             'Confirmar exclusão',
                             'Digite "EXCLUIR" para confirmar',
-                            [{ text: 'Cancelar' }]
+                            [{ text: 'Cancelar' }],
                         );
                     },
                 },
-            ]
+            ],
         );
     };
 

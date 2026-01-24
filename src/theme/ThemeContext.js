@@ -69,33 +69,33 @@ export function ThemeProvider({ children }) {
     };
 
     // Salva preferência
-    const saveTheme = async (mode) => {
+    const saveTheme = React.useCallback(async (mode) => {
         try {
             await AsyncStorage.setItem(THEME_STORAGE_KEY, mode);
         } catch (error) {
             console.warn('Erro ao salvar tema:', error);
         }
-    };
+    }, []);
 
     // Alterna o tema
-    const setTheme = (mode) => {
+    const setTheme = React.useCallback((mode) => {
         setThemeMode(mode);
         saveTheme(mode);
-    };
+    }, [saveTheme]);
 
     // Alterna entre claro e escuro
-    const toggleTheme = () => {
-        const newMode = isDark ? ThemeMode.LIGHT : ThemeMode.DARK;
-        setTheme(newMode);
-    };
-
-    // Determina se está em modo escuro
+    // Determina se está em modo escuro (necessário para o toggle)
     const isDark = useMemo(() => {
         if (themeMode === ThemeMode.SYSTEM) {
             return systemColorScheme === 'dark';
         }
         return themeMode === ThemeMode.DARK;
     }, [themeMode, systemColorScheme]);
+
+    const toggleTheme = React.useCallback(() => {
+        const newMode = isDark ? ThemeMode.LIGHT : ThemeMode.DARK;
+        setTheme(newMode);
+    }, [isDark, setTheme]);
 
     // Monta o objeto de tema
     const theme = useMemo(() => {
@@ -126,7 +126,7 @@ export function ThemeProvider({ children }) {
             // Utils
             isLoading,
         };
-    }, [isDark, themeMode, isLoading]);
+    }, [isDark, themeMode, isLoading, setTheme, toggleTheme]);
 
     return (
         <ThemeContext.Provider value={theme}>

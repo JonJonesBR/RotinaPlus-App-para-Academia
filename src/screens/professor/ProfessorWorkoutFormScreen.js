@@ -20,7 +20,7 @@ import { useTheme } from '../../theme/ThemeContext';
 import {
     UserService,
     AlunoService,
-    WorkoutService
+    WorkoutService,
 } from '../../services/storageService';
 import { createWorkout, createExercise, WEEK_DAYS } from '../../models/dataModels';
 import { PremiumCard, PremiumButton } from '../../components/common';
@@ -120,18 +120,18 @@ export default function ProfessorWorkoutFormScreen({ navigation, route }) {
                 [
                     {
                         text: 'Depois',
-                        onPress: () => navigation.goBack()
+                        onPress: () => navigation.goBack(),
                     },
                     {
                         text: 'Gerar QR',
                         onPress: () => {
                             navigation.replace('ProfessorQRExport', {
                                 type: 'workout',
-                                workoutId: workout.id
+                                workoutId: workout.id,
                             });
                         },
                     },
-                ]
+                ],
             );
         } catch (error) {
             console.error('Erro ao salvar treino:', error);
@@ -256,7 +256,7 @@ export default function ProfessorWorkoutFormScreen({ navigation, route }) {
                             <Text
                                 style={[
                                     styles.studentChipText,
-                                    { color: selectedStudent === student.id ? '#FFFFFF' : colors.text.primary }
+                                    { color: selectedStudent === student.id ? '#FFFFFF' : colors.text.primary },
                                 ]}
                             >
                                 {student.name.split(' ')[0]}
@@ -304,8 +304,8 @@ export default function ProfessorWorkoutFormScreen({ navigation, route }) {
                                     {
                                         color: selectedDays.includes(parseInt(day))
                                             ? '#FFFFFF'
-                                            : colors.text.secondary
-                                    }
+                                            : colors.text.secondary,
+                                    },
                                 ]}
                             >
                                 {info.short}
