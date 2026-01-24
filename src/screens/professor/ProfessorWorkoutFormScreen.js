@@ -25,6 +25,93 @@ import {
 import { createWorkout, createExercise, WEEK_DAYS } from '../../models/dataModels';
 import { PremiumCard, PremiumButton } from '../../components/common';
 
+const ExerciseCard = ({
+    exercise,
+    index,
+    colors,
+    shadows,
+    exercisesLength,
+    onRemove,
+    onUpdate
+}) => (
+    <View style={[styles.exerciseCard, { backgroundColor: colors.surface, ...shadows.small }]}>
+        <View style={styles.exerciseHeader}>
+            <View style={[styles.exerciseNumber, { backgroundColor: colors.primary }]}>
+                <Text style={styles.exerciseNumberText}>{index + 1}</Text>
+            </View>
+            <Text style={[styles.exerciseTitle, { color: colors.text.primary }]}>
+                Exercício {index + 1}
+            </Text>
+            {exercisesLength > 1 && (
+                <Pressable onPress={() => onRemove(index)}>
+                    <Icon name="close" size={22} color={colors.danger} />
+                </Pressable>
+            )}
+        </View>
+
+        <TextInput
+            style={[styles.input, { backgroundColor: colors.surfaceVariant, color: colors.text.primary }]}
+            value={exercise.name}
+            onChangeText={(v) => onUpdate(index, 'name', v)}
+            placeholder="Nome do exercício"
+            placeholderTextColor={colors.text.hint}
+        />
+
+        <View style={styles.exerciseRow}>
+            <View style={styles.inputGroup}>
+                <Text style={[styles.inputLabel, { color: colors.text.secondary }]}>Séries</Text>
+                <TextInput
+                    style={[styles.smallInput, { backgroundColor: colors.surfaceVariant, color: colors.text.primary }]}
+                    value={String(exercise.sets)}
+                    onChangeText={(v) => onUpdate(index, 'sets', parseInt(v) || 0)}
+                    keyboardType="number-pad"
+                    placeholderTextColor={colors.text.hint}
+                />
+            </View>
+            <View style={styles.inputGroup}>
+                <Text style={[styles.inputLabel, { color: colors.text.secondary }]}>Reps</Text>
+                <TextInput
+                    style={[styles.smallInput, { backgroundColor: colors.surfaceVariant, color: colors.text.primary }]}
+                    value={exercise.reps}
+                    onChangeText={(v) => onUpdate(index, 'reps', v)}
+                    placeholder="12-15"
+                    placeholderTextColor={colors.text.hint}
+                />
+            </View>
+            <View style={styles.inputGroup}>
+                <Text style={[styles.inputLabel, { color: colors.text.secondary }]}>Peso</Text>
+                <TextInput
+                    style={[styles.smallInput, { backgroundColor: colors.surfaceVariant, color: colors.text.primary }]}
+                    value={exercise.weight}
+                    onChangeText={(v) => onUpdate(index, 'weight', v)}
+                    placeholder="10kg"
+                    placeholderTextColor={colors.text.hint}
+                />
+            </View>
+            <View style={styles.inputGroup}>
+                <Text style={[styles.inputLabel, { color: colors.text.secondary }]}>Desc</Text>
+                <TextInput
+                    style={[styles.smallInput, { backgroundColor: colors.surfaceVariant, color: colors.text.primary }]}
+                    value={String(exercise.rest)}
+                    onChangeText={(v) => onUpdate(index, 'rest', parseInt(v) || 60)}
+                    keyboardType="number-pad"
+                    placeholder="60s"
+                    placeholderTextColor={colors.text.hint}
+                />
+            </View>
+        </View>
+
+        <TextInput
+            style={[styles.input, styles.notesInput, { backgroundColor: colors.surfaceVariant, color: colors.text.primary }]}
+            value={exercise.notes}
+            onChangeText={(v) => onUpdate(index, 'notes', v)}
+            placeholder="Observações (opcional)"
+            placeholderTextColor={colors.text.hint}
+            multiline
+        />
+    </View>
+);
+
 export default function ProfessorWorkoutFormScreen({ navigation, route }) {
     const { colors, shadows } = useTheme();
     const studentId = route.params?.studentId;
@@ -141,84 +228,7 @@ export default function ProfessorWorkoutFormScreen({ navigation, route }) {
         }
     };
 
-    const ExerciseCard = ({ exercise, index }) => (
-        <View style={[styles.exerciseCard, { backgroundColor: colors.surface, ...shadows.small }]}>
-            <View style={styles.exerciseHeader}>
-                <View style={[styles.exerciseNumber, { backgroundColor: colors.primary }]}>
-                    <Text style={styles.exerciseNumberText}>{index + 1}</Text>
-                </View>
-                <Text style={[styles.exerciseTitle, { color: colors.text.primary }]}>
-                    Exercício {index + 1}
-                </Text>
-                {exercises.length > 1 && (
-                    <Pressable onPress={() => removeExercise(index)}>
-                        <Icon name="close" size={22} color={colors.danger} />
-                    </Pressable>
-                )}
-            </View>
 
-            <TextInput
-                style={[styles.input, { backgroundColor: colors.surfaceVariant, color: colors.text.primary }]}
-                value={exercise.name}
-                onChangeText={(v) => updateExercise(index, 'name', v)}
-                placeholder="Nome do exercício"
-                placeholderTextColor={colors.text.hint}
-            />
-
-            <View style={styles.exerciseRow}>
-                <View style={styles.inputGroup}>
-                    <Text style={[styles.inputLabel, { color: colors.text.secondary }]}>Séries</Text>
-                    <TextInput
-                        style={[styles.smallInput, { backgroundColor: colors.surfaceVariant, color: colors.text.primary }]}
-                        value={String(exercise.sets)}
-                        onChangeText={(v) => updateExercise(index, 'sets', parseInt(v) || 0)}
-                        keyboardType="number-pad"
-                        placeholderTextColor={colors.text.hint}
-                    />
-                </View>
-                <View style={styles.inputGroup}>
-                    <Text style={[styles.inputLabel, { color: colors.text.secondary }]}>Reps</Text>
-                    <TextInput
-                        style={[styles.smallInput, { backgroundColor: colors.surfaceVariant, color: colors.text.primary }]}
-                        value={exercise.reps}
-                        onChangeText={(v) => updateExercise(index, 'reps', v)}
-                        placeholder="12-15"
-                        placeholderTextColor={colors.text.hint}
-                    />
-                </View>
-                <View style={styles.inputGroup}>
-                    <Text style={[styles.inputLabel, { color: colors.text.secondary }]}>Peso</Text>
-                    <TextInput
-                        style={[styles.smallInput, { backgroundColor: colors.surfaceVariant, color: colors.text.primary }]}
-                        value={exercise.weight}
-                        onChangeText={(v) => updateExercise(index, 'weight', v)}
-                        placeholder="10kg"
-                        placeholderTextColor={colors.text.hint}
-                    />
-                </View>
-                <View style={styles.inputGroup}>
-                    <Text style={[styles.inputLabel, { color: colors.text.secondary }]}>Desc</Text>
-                    <TextInput
-                        style={[styles.smallInput, { backgroundColor: colors.surfaceVariant, color: colors.text.primary }]}
-                        value={String(exercise.rest)}
-                        onChangeText={(v) => updateExercise(index, 'rest', parseInt(v) || 60)}
-                        keyboardType="number-pad"
-                        placeholder="60s"
-                        placeholderTextColor={colors.text.hint}
-                    />
-                </View>
-            </View>
-
-            <TextInput
-                style={[styles.input, styles.notesInput, { backgroundColor: colors.surfaceVariant, color: colors.text.primary }]}
-                value={exercise.notes}
-                onChangeText={(v) => updateExercise(index, 'notes', v)}
-                placeholder="Observações (opcional)"
-                placeholderTextColor={colors.text.hint}
-                multiline
-            />
-        </View>
-    );
 
     return (
         <KeyboardAvoidingView
@@ -319,7 +329,16 @@ export default function ProfessorWorkoutFormScreen({ navigation, route }) {
                     Exercícios
                 </Text>
                 {exercises.map((exercise, index) => (
-                    <ExerciseCard key={exercise.id} exercise={exercise} index={index} />
+                    <ExerciseCard
+                        key={exercise.id}
+                        exercise={exercise}
+                        index={index}
+                        colors={colors}
+                        shadows={shadows}
+                        exercisesLength={exercises.length}
+                        onRemove={removeExercise}
+                        onUpdate={updateExercise}
+                    />
                 ))}
 
                 <Pressable

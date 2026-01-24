@@ -18,6 +18,111 @@ import { useTheme } from '../../theme/ThemeContext';
 import { WorkoutService } from '../../services/storageService';
 import { PremiumCard, PremiumButton } from '../../components/common';
 
+const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+};
+
+const ExerciseCard = ({
+    exercise,
+    isCompleted,
+    isTimerActive,
+    timerSeconds,
+    colors,
+    onToggle,
+    onTimerStart,
+    onTimerStop
+}) => {
+    return (
+        <Pressable onPress={() => onToggle(exercise.id)}>
+            <PremiumCard
+                style={[
+                    styles.exerciseCard,
+                    isCompleted && {
+                        backgroundColor: colors.successLight,
+                        borderLeftWidth: 4,
+                        borderLeftColor: colors.success,
+                    },
+                ]}
+            >
+                <View style={styles.exerciseHeader}>
+                    <View style={styles.exerciseLeft}>
+                        <View style={[
+                            styles.checkbox,
+                            {
+                                backgroundColor: isCompleted ? colors.success : 'transparent',
+                                borderColor: isCompleted ? colors.success : colors.border,
+                            },
+                        ]}>
+                            {isCompleted && (
+                                <Icon name="check" size={18} color="#FFFFFF" />
+                            )}
+                        </View>
+                        <View style={styles.exerciseInfo}>
+                            <Text style={[
+                                styles.exerciseName,
+                                {
+                                    color: colors.text.primary,
+                                    textDecorationLine: isCompleted ? 'line-through' : 'none',
+                                },
+                            ]}>
+                                {exercise.name}
+                            </Text>
+                            <Text style={[styles.exerciseDetails, { color: colors.text.secondary }]}>
+                                {exercise.sets} séries × {exercise.reps} reps
+                                {exercise.weight ? ` • ${exercise.weight}` : ''}
+                            </Text>
+                        </View>
+                    </View>
+                </View>
+
+                {!isCompleted && (
+                    <View style={styles.exerciseActions}>
+                        {/* Rest Timer */}
+                        <Pressable
+                            style={[
+                                styles.timerButton,
+                                {
+                                    backgroundColor: isTimerActive ? colors.primary : colors.surfaceVariant,
+                                },
+                            ]}
+                            onPress={() => {
+                                if (isTimerActive) {
+                                    onTimerStop();
+                                } else {
+                                    onTimerStart(exercise.id, exercise.rest || 60);
+                                }
+                            }}
+                        >
+                            <Icon
+                                name={isTimerActive ? 'pause' : 'timer'}
+                                size={18}
+                                color={isTimerActive ? '#FFFFFF' : colors.text.secondary}
+                            />
+                            <Text style={[
+                                styles.timerText,
+                                { color: isTimerActive ? '#FFFFFF' : colors.text.secondary },
+                            ]}>
+                                {isTimerActive ? formatTime(timerSeconds) : `${exercise.rest || 60}s`}
+                            </Text>
+                        </Pressable>
+                    </View>
+                )}
+
+                {exercise.notes && (
+                    <View style={[styles.notesBox, { backgroundColor: colors.surfaceVariant }]}>
+                        <Icon name="info-outline" size={16} color={colors.text.secondary} />
+                        <Text style={[styles.notesText, { color: colors.text.secondary }]}>
+                            {exercise.notes}
+                        </Text>
+                    </View>
+                )}
+            </PremiumCard>
+        </Pressable>
+    );
+};
+
 export default function AlunoWorkoutDetailScreen({ navigation, route }) {
     const { colors, shadows } = useTheme();
     const workoutId = route.params?.workoutId;
@@ -100,11 +205,7 @@ export default function AlunoWorkoutDetailScreen({ navigation, route }) {
         setTimerSeconds(0);
     };
 
-    const formatTime = (seconds) => {
-        const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        return `${mins}:${secs.toString().padStart(2, '0')}`;
-    };
+
 
     const handleFinishWorkout = () => {
         const allCompleted = completedExercises.length === workout?.exercises?.length;
@@ -130,98 +231,7 @@ export default function AlunoWorkoutDetailScreen({ navigation, route }) {
         );
     }
 
-    const ExerciseCard = ({ exercise, index }) => {
-        const isCompleted = completedExercises.includes(exercise.id);
-        const isTimerActive = activeTimer === exercise.id;
 
-        return (
-            <Pressable onPress={() => toggleExercise(exercise.id)}>
-                <PremiumCard
-                    style={[
-                        styles.exerciseCard,
-                        isCompleted && {
-                            backgroundColor: colors.successLight,
-                            borderLeftWidth: 4,
-                            borderLeftColor: colors.success,
-                        },
-                    ]}
-                >
-                    <View style={styles.exerciseHeader}>
-                        <View style={styles.exerciseLeft}>
-                            <View style={[
-                                styles.checkbox,
-                                {
-                                    backgroundColor: isCompleted ? colors.success : 'transparent',
-                                    borderColor: isCompleted ? colors.success : colors.border,
-                                },
-                            ]}>
-                                {isCompleted && (
-                                    <Icon name="check" size={18} color="#FFFFFF" />
-                                )}
-                            </View>
-                            <View style={styles.exerciseInfo}>
-                                <Text style={[
-                                    styles.exerciseName,
-                                    {
-                                        color: colors.text.primary,
-                                        textDecorationLine: isCompleted ? 'line-through' : 'none',
-                                    },
-                                ]}>
-                                    {exercise.name}
-                                </Text>
-                                <Text style={[styles.exerciseDetails, { color: colors.text.secondary }]}>
-                                    {exercise.sets} séries × {exercise.reps} reps
-                                    {exercise.weight ? ` • ${exercise.weight}` : ''}
-                                </Text>
-                            </View>
-                        </View>
-                    </View>
-
-                    {!isCompleted && (
-                        <View style={styles.exerciseActions}>
-                            {/* Rest Timer */}
-                            <Pressable
-                                style={[
-                                    styles.timerButton,
-                                    {
-                                        backgroundColor: isTimerActive ? colors.primary : colors.surfaceVariant,
-                                    },
-                                ]}
-                                onPress={() => {
-                                    if (isTimerActive) {
-                                        stopTimer();
-                                    } else {
-                                        startTimer(exercise.id, exercise.rest || 60);
-                                    }
-                                }}
-                            >
-                                <Icon
-                                    name={isTimerActive ? 'pause' : 'timer'}
-                                    size={18}
-                                    color={isTimerActive ? '#FFFFFF' : colors.text.secondary}
-                                />
-                                <Text style={[
-                                    styles.timerText,
-                                    { color: isTimerActive ? '#FFFFFF' : colors.text.secondary },
-                                ]}>
-                                    {isTimerActive ? formatTime(timerSeconds) : `${exercise.rest || 60}s`}
-                                </Text>
-                            </Pressable>
-                        </View>
-                    )}
-
-                    {exercise.notes && (
-                        <View style={[styles.notesBox, { backgroundColor: colors.surfaceVariant }]}>
-                            <Icon name="info-outline" size={16} color={colors.text.secondary} />
-                            <Text style={[styles.notesText, { color: colors.text.secondary }]}>
-                                {exercise.notes}
-                            </Text>
-                        </View>
-                    )}
-                </PremiumCard>
-            </Pressable>
-        );
-    };
 
     return (
         <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -265,7 +275,17 @@ export default function AlunoWorkoutDetailScreen({ navigation, route }) {
                 showsVerticalScrollIndicator={false}
             >
                 {workout.exercises?.map((exercise, index) => (
-                    <ExerciseCard key={exercise.id} exercise={exercise} index={index} />
+                    <ExerciseCard
+                        key={exercise.id}
+                        exercise={exercise}
+                        isCompleted={completedExercises.includes(exercise.id)}
+                        isTimerActive={activeTimer === exercise.id}
+                        timerSeconds={timerSeconds}
+                        colors={colors}
+                        onToggle={toggleExercise}
+                        onTimerStart={startTimer}
+                        onTimerStop={stopTimer}
+                    />
                 ))}
 
                 {/* Finish Button */}
