@@ -10,7 +10,7 @@
   [![React Native](https://img.shields.io/badge/React%20Native-0.81+-61DAFB.svg?logo=react)](https://reactnative.dev/)
   [![Expo](https://img.shields.io/badge/Expo-SDK%2052+-000020.svg?logo=expo)](https://expo.dev/)
   
-  [📱 Download APK v0.0.8](https://github.com/JonJonesBR/RotinaPlus-App-para-Academia/releases/download/v0.0.8/RotinaPlus-v0.0.8.apk) • [📖 Documentação](#-Funcionalidades_Principais) • [🤝 Contribuir](#-contribuição)
+  [📱 Download APK v0.0.8](https://github.com/JonJonesBR/RotinaPlus-App-para-Academia/releases/download/v0.0.8/RotinaPlus-v0.0.8.apk) • [📖 Documentação](#-Funcionalidades) • [🤝 Contribuir](#-contribuição)
 </div>
 
 ---
@@ -71,7 +71,7 @@ O app foca na segurança dos dados (armazenamento local criptografado), facilida
 
 ---
 
-## ✨ Funcionalidades Principais
+## ✨ Funcionalidades
 
 ### 🔐 Segurança e Autenticação
 - **Modo Dual**: Interface adaptativa para Professor ou Aluno.
