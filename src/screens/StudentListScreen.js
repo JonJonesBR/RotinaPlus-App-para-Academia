@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   FlatList,
@@ -7,6 +7,32 @@ import {
 } from 'react-native';
 import { Text, Button, FAB } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// Componente de item memoizado
+const StudentListItem = React.memo(({ item, onEdit, onDelete }) => (
+  <View style={styles.listItem}>
+    <Text style={styles.listText}>
+      {item.name} - {item.cpf}
+    </Text>
+    <View style={styles.actions}>
+      <Button
+        mode="outlined"
+        onPress={() => onEdit(item)}
+        style={styles.editButton}
+      >
+        Editar
+      </Button>
+      <Button
+        mode="outlined"
+        onPress={() => onDelete(item.id)}
+        style={styles.deleteButton}
+        color="red"
+      >
+        Excluir
+      </Button>
+    </View>
+  </View>
+));
 
 export default function StudentListScreen({ navigation }) {
   const [students, setStudents] = useState([]);
@@ -19,19 +45,19 @@ export default function StudentListScreen({ navigation }) {
   }, [navigation]);
 
   // Carregar alunos do AsyncStorage
-  const loadStudents = async () => {
+  const loadStudents = useCallback(async () => {
     try {
       const storedStudents = await AsyncStorage.getItem('@students');
       if (storedStudents) {
         setStudents(JSON.parse(storedStudents));
       }
     } catch (error) {
-      console.error('Erro ao carregar alunos:', error);
+      if (__DEV__) console.error('Erro ao carregar alunos:', error);
     }
-  };
+  }, []);
 
   // Excluir aluno
-  const handleDelete = (id) => {
+  const handleDelete = useCallback((id) => {
     Alert.alert('Confirmação', 'Deseja excluir este aluno?', [
       {
         text: 'Cancelar',
@@ -48,7 +74,19 @@ export default function StudentListScreen({ navigation }) {
         },
       },
     ]);
-  };
+  }, [students]);
+
+  const handleEdit = useCallback((item) => {
+    navigation.navigate('StudentForm', { student: item });
+  }, [navigation]);
+
+  const renderItem = useCallback(({ item }) => (
+    <StudentListItem
+      item={item}
+      onEdit={handleEdit}
+      onDelete={handleDelete}
+    />
+  ), [handleEdit, handleDelete]);
 
   return (
     <View style={styles.container}>
@@ -56,30 +94,7 @@ export default function StudentListScreen({ navigation }) {
       <FlatList
         data={students}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.listItem}>
-            <Text style={styles.listText}>
-              {item.name} - {item.cpf}
-            </Text>
-            <View style={styles.actions}>
-              <Button
-                mode="outlined"
-                onPress={() => navigation.navigate('StudentForm', { student: item })}
-                style={styles.editButton}
-              >
-                Editar
-              </Button>
-              <Button
-                mode="outlined"
-                onPress={() => handleDelete(item.id)}
-                style={styles.deleteButton}
-                color="red"
-              >
-                Excluir
-              </Button>
-            </View>
-          </View>
-        )}
+        renderItem={renderItem}
       />
       <FAB
         icon="plus"

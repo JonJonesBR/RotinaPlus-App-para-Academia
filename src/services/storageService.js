@@ -41,7 +41,7 @@ const getStorageItem = async (key, defaultValue = []) => {
         const data = await AsyncStorage.getItem(key);
         return data ? JSON.parse(data) : defaultValue;
     } catch (error) {
-        console.error(`Erro ao ler ${key}:`, error);
+        if (__DEV__) console.error(`Erro ao ler ${key}:`, error);
         return defaultValue;
     }
 };
@@ -51,7 +51,7 @@ const setStorageItem = async (key, value) => {
         await AsyncStorage.setItem(key, JSON.stringify(value));
         return true;
     } catch (error) {
-        console.error(`Erro ao salvar ${key}:`, error);
+        if (__DEV__) console.error(`Erro ao salvar ${key}:`, error);
         return false;
     }
 };
@@ -558,10 +558,12 @@ export const LegacyService = {
             // Opcional: Backup
             // await AsyncStorage.setItem('@students_backup', legacyData);
 
-            console.log(`Migração concluída: ${toAdd.length} alunos migrados.`);
+            // await AsyncStorage.setItem('@students_backup', legacyData);
+
+            if (__DEV__) console.log(`Migração concluída: ${toAdd.length} alunos migrados.`);
             return true;
         } catch (error) {
-            console.error('Erro na migração:', error);
+            if (__DEV__) console.error('Erro na migração:', error);
             return false;
         }
     },

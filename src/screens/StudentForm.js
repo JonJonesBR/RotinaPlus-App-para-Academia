@@ -7,7 +7,7 @@
  * - Validação visual inline
  * - Feedback de loading no botão
  */
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   View,
   Text,
@@ -120,14 +120,14 @@ export default function StudentForm({ route, navigation }) {
       // Navegar para registro de exercícios
       navigation.navigate('ExerciseLog', { student: studentData });
     } catch (error) {
-      console.error('Erro ao salvar aluno:', error);
+      if (__DEV__) console.error('Erro ao salvar aluno:', error);
     } finally {
       setLoading(false);
     }
   };
 
   // Estilo customizado para inputs
-  const inputTheme = {
+  const inputTheme = useMemo(() => ({
     colors: {
       primary: colors.primary,
       error: colors.danger,
@@ -137,7 +137,7 @@ export default function StudentForm({ route, navigation }) {
       outline: colors.border,
     },
     roundness: borderRadius.md,
-  };
+  }), [colors, borderRadius]);
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
