@@ -2,7 +2,7 @@
   "expo": {
     "name": "Rotina+",
     "slug": "rotina-plus",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "Rotina+ é um aplicativo desenvolvido para ajudar academias e profissionais autônomos de educação física a gerenciar rotinas de treino, acompanhar o progresso dos alunos e oferecer um serviço mais eficiente e personalizado.",
     "assetBundlePatterns": [
       "**/*"
@@ -19,7 +19,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.seudominio.rotinaplus",
-      "buildNumber": "0.0.6",
+      "buildNumber": "0.0.7",
       "icon": "./assets/icon.png",
       "splash": {
         "image": "./assets/splash.png",
@@ -33,7 +33,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.seudominio.rotinaplus",
-      "versionCode": 2,
+      "versionCode": 3,
       "splash": {
         "image": "./assets/splash.png",
         "resizeMode": "contain",
