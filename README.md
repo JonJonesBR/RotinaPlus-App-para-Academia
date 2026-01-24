@@ -24,16 +24,48 @@ O app foca na segurança dos dados (armazenamento local criptografado), facilida
 
 ---
 
-## 📱 Screenshots
+## 📱 Galeria do App
 
+> Interface moderna, intuitiva e em Dark Mode para economizar bateria e oferecer a melhor experiência.
+
+### 🏠 Acesso e Boas-vindas
 <div align="center">
-  <img src="assets/showcase_login.png" width="200" alt="Tela de Login" />
-  <img src="assets/showcase_prof.png" width="200" alt="Painel do Professor" />
-  <img src="assets/showcase_aluno.png" width="200" alt="Painel do Aluno" />
-  <img src="assets/showcase_qrsync.png" width="200" alt="QR Sync" />
+  <img src="assets/screenshots/screen_01.jpeg" width="30%" alt="Tela 1" />
+  <img src="assets/screenshots/screen_02.jpeg" width="30%" alt="Tela 2" />
+  <img src="assets/screenshots/screen_03.jpeg" width="30%" alt="Tela 3" />
+</div>
+<div align="center">
+  <img src="assets/screenshots/screen_04.jpeg" width="30%" alt="Tela 4" />
+  <img src="assets/screenshots/screen_05.jpeg" width="30%" alt="Tela 5" />
 </div>
 
-> *Interface moderna, intuitiva e em Dark Mode para economizar bateria.*
+### 👨‍🏫 Área do Professor
+<div align="center">
+  <img src="assets/screenshots/screen_06.jpeg" width="30%" alt="Tela Professor 1" />
+  <img src="assets/screenshots/screen_07.jpeg" width="30%" alt="Tela Professor 2" />
+  <img src="assets/screenshots/screen_08.jpeg" width="30%" alt="Tela Professor 3" />
+</div>
+<div align="center">
+  <img src="assets/screenshots/screen_09.jpeg" width="30%" alt="Tela Professor 4" />
+  <img src="assets/screenshots/screen_10.jpeg" width="30%" alt="Tela Professor 5" />
+  <img src="assets/screenshots/screen_11.jpeg" width="30%" alt="Tela Professor 6" />
+</div>
+
+### 🏋️ Área do Aluno
+<div align="center">
+  <img src="assets/screenshots/screen_12.jpeg" width="30%" alt="Tela Aluno 1" />
+  <img src="assets/screenshots/screen_13.jpeg" width="30%" alt="Tela Aluno 2" />
+  <img src="assets/screenshots/screen_14.jpeg" width="30%" alt="Tela Aluno 3" />
+</div>
+<div align="center">
+  <img src="assets/screenshots/screen_15.jpeg" width="30%" alt="Tela Aluno 4" />
+  <img src="assets/screenshots/screen_16.jpeg" width="30%" alt="Tela Aluno 5" />
+  <img src="assets/screenshots/screen_17.jpeg" width="30%" alt="Tela Aluno 6" />
+</div>
+<div align="center">
+  <img src="assets/screenshots/screen_18.jpeg" width="30%" alt="Tela Aluno 7" />
+  <img src="assets/screenshots/screen_19.jpeg" width="30%" alt="Tela Aluno 8" />
+</div>
 
 ---
 
