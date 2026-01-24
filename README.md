@@ -30,41 +30,43 @@ O app foca na segurança dos dados (armazenamento local criptografado), facilida
 
 ### 🏠 Acesso e Boas-vindas
 <div align="center">
-  <img src="assets/screenshots/screen_01.jpeg" width="30%" alt="Tela 1" />
-  <img src="assets/screenshots/screen_02.jpeg" width="30%" alt="Tela 2" />
-  <img src="assets/screenshots/screen_03.jpeg" width="30%" alt="Tela 3" />
-</div>
-<div align="center">
-  <img src="assets/screenshots/screen_04.jpeg" width="30%" alt="Tela 4" />
-  <img src="assets/screenshots/screen_05.jpeg" width="30%" alt="Tela 5" />
+  <img src="assets/screenshots/auth_01.jpeg" width="30%" alt="Tela Inicial" />
 </div>
 
 ### 👨‍🏫 Área do Professor
 <div align="center">
-  <img src="assets/screenshots/screen_06.jpeg" width="30%" alt="Tela Professor 1" />
-  <img src="assets/screenshots/screen_07.jpeg" width="30%" alt="Tela Professor 2" />
-  <img src="assets/screenshots/screen_08.jpeg" width="30%" alt="Tela Professor 3" />
+  <img src="assets/screenshots/prof_01.jpeg" width="30%" alt="Dashboard Professor" />
+  <img src="assets/screenshots/prof_02.jpeg" width="30%" alt="Gestão Alunos" />
+  <img src="assets/screenshots/prof_03.jpeg" width="30%" alt="Detalhe Aluno" />
 </div>
 <div align="center">
-  <img src="assets/screenshots/screen_09.jpeg" width="30%" alt="Tela Professor 4" />
-  <img src="assets/screenshots/screen_10.jpeg" width="30%" alt="Tela Professor 5" />
-  <img src="assets/screenshots/screen_11.jpeg" width="30%" alt="Tela Professor 6" />
+  <img src="assets/screenshots/prof_04.jpeg" width="30%" alt="Novo Treino" />
+  <img src="assets/screenshots/prof_05.jpeg" width="30%" alt="Formulário Treino" />
+  <img src="assets/screenshots/prof_06.jpeg" width="30%" alt="Lista Exercícios" />
+</div>
+<div align="center">
+  <img src="assets/screenshots/prof_07.jpeg" width="30%" alt="QR Code" />
+  <img src="assets/screenshots/prof_08.jpeg" width="30%" alt="Financeiro Prof" />
+  <img src="assets/screenshots/prof_09.jpeg" width="30%" alt="Perfil Prof" />
+</div>
+<div align="center">
+  <img src="assets/screenshots/prof_10.jpeg" width="30%" alt="Configurações" />
+  <img src="assets/screenshots/prof_11.jpeg" width="30%" alt="Ajuda" />
 </div>
 
 ### 🏋️ Área do Aluno
 <div align="center">
-  <img src="assets/screenshots/screen_12.jpeg" width="30%" alt="Tela Aluno 1" />
-  <img src="assets/screenshots/screen_13.jpeg" width="30%" alt="Tela Aluno 2" />
-  <img src="assets/screenshots/screen_14.jpeg" width="30%" alt="Tela Aluno 3" />
+  <img src="assets/screenshots/student_01.jpeg" width="30%" alt="Dashboard Aluno" />
+  <img src="assets/screenshots/student_02.jpeg" width="30%" alt="Treino do Dia" />
+  <img src="assets/screenshots/student_03.jpeg" width="30%" alt="Execução Treino" />
 </div>
 <div align="center">
-  <img src="assets/screenshots/screen_15.jpeg" width="30%" alt="Tela Aluno 4" />
-  <img src="assets/screenshots/screen_16.jpeg" width="30%" alt="Tela Aluno 5" />
-  <img src="assets/screenshots/screen_17.jpeg" width="30%" alt="Tela Aluno 6" />
+  <img src="assets/screenshots/student_04.jpeg" width="30%" alt="Timer Descanso" />
+  <img src="assets/screenshots/student_05.jpeg" width="30%" alt="QR Scanner" />
+  <img src="assets/screenshots/student_06.jpeg" width="30%" alt="Financeiro Aluno" />
 </div>
 <div align="center">
-  <img src="assets/screenshots/screen_18.jpeg" width="30%" alt="Tela Aluno 7" />
-  <img src="assets/screenshots/screen_19.jpeg" width="30%" alt="Tela Aluno 8" />
+  <img src="assets/screenshots/student_07.jpeg" width="30%" alt="Perfil Aluno" />
 </div>
 
 ---
