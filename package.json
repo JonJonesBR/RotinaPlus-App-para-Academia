@@ -1,6 +1,6 @@
 {
   "name": "rotina-plus",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Rotina+ é um aplicativo desenvolvido para ajudar academias e profissionais autônomos de educação física a gerenciar rotinas de treino, acompanhar o progresso dos alunos e oferecer um serviço mais eficiente e personalizado.",
   "main": "expo/AppEntry.js",
   "scripts": {

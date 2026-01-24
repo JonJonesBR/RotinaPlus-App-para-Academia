@@ -180,12 +180,13 @@ export default function AlunoRegistrationScreen({ navigation }) {
             newErrors.goal = 'Selecione um objetivo';
         }
 
-        if (!form.professorCode.trim()) {
-            newErrors.professorCode = 'Código do professor é obrigatório';
-        } else if (!validators.isValidProfessorCode(form.professorCode)) {
-            newErrors.professorCode = 'Código inválido. Use o formato PROF-XXXXXX';
-        } else if (!professorFound) {
-            newErrors.professorCode = 'Professor não encontrado';
+        // Professor code is now optional
+        if (form.professorCode.trim()) {
+            if (!validators.isValidProfessorCode(form.professorCode)) {
+                newErrors.professorCode = 'Código inválido. Use o formato PROF-XXXXXX';
+            } else if (!professorFound) {
+                newErrors.professorCode = 'Professor não encontrado';
+            }
         }
 
         setErrors(newErrors);
@@ -200,8 +201,12 @@ export default function AlunoRegistrationScreen({ navigation }) {
         setLoading(true);
 
         try {
-            // Cria referência do professor
-            const professorRef = createProfessorRef(professorFound);
+            // Prepara lista de professores (se houver)
+            const professorsList = [];
+            if (professorFound) {
+                const professorRef = createProfessorRef(professorFound);
+                professorsList.push(professorRef);
+            }
 
             // Cria o aluno
             const aluno = createAluno({
@@ -210,22 +215,29 @@ export default function AlunoRegistrationScreen({ navigation }) {
                 phone: form.phone.trim(),
                 birthDate: form.birthDate.trim() || null,
                 goal: form.goal,
-                professors: [professorRef],
+                professors: professorsList,
             });
 
             // Salva no storage
             await AlunoService.save(aluno);
 
-            // Vincula aluno ao professor
-            await ProfessorService.addStudent(professorFound.id, aluno.id);
+            // Se tiver professor, vincula
+            if (professorFound) {
+                await ProfessorService.addStudent(professorFound.id, aluno.id);
+            }
 
             // Define como usuário atual
             await UserService.setCurrentUser(aluno, UserRole.ALUNO);
 
+            // Mensagem personalizada
+            const message = professorFound
+                ? `Cadastro realizado com sucesso!\n\nVocê está vinculado ao professor ${professorFound.name}.`
+                : 'Cadastro realizado com sucesso!\n\nVocê pode vincular um professor depois no seu perfil.';
+
             // Navega para o dashboard
             Alert.alert(
                 'Bem-vindo(a)!',
-                `Cadastro realizado com sucesso!\n\nVocê está vinculado ao professor ${professorFound.name}.`,
+                message,
                 [
                     {
                         text: 'Começar',
@@ -285,7 +297,7 @@ export default function AlunoRegistrationScreen({ navigation }) {
                     </View>
 
                     <InputField
-                        label="Código do Professor"
+                        label="Código do Professor (opcional)"
                         value={form.professorCode}
                         onChangeText={(v) => updateField('professorCode', v.toUpperCase())}
                         error={errors.professorCode}
@@ -424,7 +436,7 @@ export default function AlunoRegistrationScreen({ navigation }) {
                         onPress={handleSubmit}
                         loading={loading}
                         icon="check"
-                        disabled={!professorFound}
+                        disabled={loading}
                     />
                 </View>
             </ScrollView>

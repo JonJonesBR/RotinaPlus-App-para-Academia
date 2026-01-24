@@ -288,7 +288,7 @@ export default function AlunoDashboardScreen({ navigation }) {
             </View>
 
             {/* Professor Info */}
-            {aluno?.professors?.length > 0 && (
+            {aluno?.professors?.length > 0 ? (
                 <>
                     <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>
                         Meu Professor
@@ -316,6 +316,24 @@ export default function AlunoDashboardScreen({ navigation }) {
                         </PremiumCard>
                     ))}
                 </>
+            ) : (
+                <View style={styles.emptyState}>
+                    <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>
+                        Professor
+                    </Text>
+                    <PremiumCard style={styles.emptyCard}>
+                        <Icon name="person-add" size={48} color={colors.text.disabled} />
+                        <Text style={[styles.emptyText, { color: colors.text.secondary }]}>
+                            Você ainda não tem um professor vinculado.
+                        </Text>
+                        <PremiumButton
+                            title="Vincular Professor"
+                            onPress={() => navigation.navigate('AlunoQRImport')}
+                            variant="primary"
+                            size="sm"
+                        />
+                    </PremiumCard>
+                </View>
             )}
         </ScrollView>
     );
@@ -499,5 +517,18 @@ const styles = StyleSheet.create({
     },
     academyName: {
         fontSize: 13,
+    },
+    emptyState: {
+        marginBottom: 24,
+    },
+    emptyCard: {
+        alignItems: 'center',
+        padding: 24,
+        gap: 16,
+    },
+    emptyText: {
+        fontSize: 15,
+        textAlign: 'center',
+        lineHeight: 22,
     },
 });
