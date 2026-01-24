@@ -10,7 +10,7 @@
   [![React Native](https://img.shields.io/badge/React%20Native-0.81+-61DAFB.svg?logo=react)](https://reactnative.dev/)
   [![Expo](https://img.shields.io/badge/Expo-SDK%2052+-000020.svg?logo=expo)](https://expo.dev/)
   
-  [📱 Download APK v0.0.5](https://github.com/JonJonesBR/RotinaPlus-App-para-Academia/releases/download/v0.0.8/RotinaPlus-v0.0.8.apk) • [📖 Documentação](#-uso) • [🤝 Contribuir](#-contribuição)
+  [📱 Download APK v0.0.8](https://github.com/JonJonesBR/RotinaPlus-App-para-Academia/releases/download/v0.0.8/RotinaPlus-v0.0.8.apk) • [📖 Documentação](#-uso) • [🤝 Contribuir](#-contribuição)
 </div>
 
 ---
