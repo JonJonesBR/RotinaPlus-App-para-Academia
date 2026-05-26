@@ -1,4 +1,4 @@
-# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+﻿# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
 # dependencies
 node_modules/
@@ -33,3 +33,25 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+# Local secrets and environment files
+.env
+.env.*
+!.env.example
+*.pfx
+*.keystore
+credentials.json
+credentials*.json
+secrets.json
+service-account*.json
+google-services.json
+.npmrc
+.pypirc
+.netrc
+# Local caches and generated files
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+build/
+coverage/
+*.log
