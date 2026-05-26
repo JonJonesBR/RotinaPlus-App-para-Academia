@@ -292,7 +292,7 @@ export default function AlunoWorkoutDetailScreen({ navigation, route }) {
                 <View style={styles.finishContainer}>
                     <PremiumButton
                         title={completedExercises.length === workout.exercises?.length
-                            ? 'Finalizar Treino 🎉'
+                            ? 'Finalizar Treino '
                             : 'Encerrar Sessão'
                         }
                         onPress={handleFinishWorkout}

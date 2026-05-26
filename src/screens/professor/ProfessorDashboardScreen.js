@@ -182,7 +182,7 @@ export default function ProfessorDashboardScreen({ navigation }) {
             <View style={styles.header}>
                 <View style={styles.headerLeft}>
                     <Text style={[styles.greeting, { color: colors.text.secondary }]}>
-                        Olá, {professor?.name?.split(' ')[0] || 'Professor'}! 👋
+                        Olá, {professor?.name?.split(' ')[0] || 'Professor'}! 
                     </Text>
                     <Text style={[styles.headerTitle, { color: colors.text.primary }]}>
                         {professor?.academyName || 'Rotina+'}
