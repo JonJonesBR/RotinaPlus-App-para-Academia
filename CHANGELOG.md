@@ -18,7 +18,7 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 ### Corrigido
 - Bug crítico de hooks condicionais em `ConfirmSeriesScreen.js`
-- Inconsistência de licença (GPL-3.0 → MIT)
+- Inconsistência de licença (GPL-3.0 -> MIT)
 - Campo "author" vazio no package.json
 
 ### Removido

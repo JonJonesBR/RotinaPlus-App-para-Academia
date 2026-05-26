@@ -61,10 +61,10 @@ export const lightColors = {
     overlay: 'rgba(15, 23, 42, 0.5)', // Slate-900 com opacidade
 
     // Gradientes (como arrays para LinearGradient)
-    gradientPrimary: ['#0D9488', '#0EA5E9'],    // Teal → Sky
-    gradientSecondary: ['#2563EB', '#7C3AED'],  // Blue → Violet
-    gradientAccent: ['#F59E0B', '#EF4444'],     // Amber → Red
-    gradientSuccess: ['#22C55E', '#0D9488'],    // Green → Teal
+    gradientPrimary: ['#0D9488', '#0EA5E9'],    // Teal -> Sky
+    gradientSecondary: ['#2563EB', '#7C3AED'],  // Blue -> Violet
+    gradientAccent: ['#F59E0B', '#EF4444'],     // Amber -> Red
+    gradientSuccess: ['#22C55E', '#0D9488'],    // Green -> Teal
 };
 
 // ============================================
@@ -119,10 +119,10 @@ export const darkColors = {
     overlay: 'rgba(0, 0, 0, 0.7)',
 
     // Gradientes
-    gradientPrimary: ['#14B8A6', '#38BDF8'],    // Teal → Sky
-    gradientSecondary: ['#3B82F6', '#8B5CF6'],  // Blue → Violet
-    gradientAccent: ['#FBBF24', '#F87171'],     // Amber → Red
-    gradientSuccess: ['#4ADE80', '#14B8A6'],    // Green → Teal
+    gradientPrimary: ['#14B8A6', '#38BDF8'],    // Teal -> Sky
+    gradientSecondary: ['#3B82F6', '#8B5CF6'],  // Blue -> Violet
+    gradientAccent: ['#FBBF24', '#F87171'],     // Amber -> Red
+    gradientSuccess: ['#4ADE80', '#14B8A6'],    // Green -> Teal
 };
 
 // ============================================

@@ -128,7 +128,7 @@ export default function AlunoDashboardScreen({ navigation }) {
             <View style={styles.header}>
                 <View style={styles.headerLeft}>
                     <Text style={[styles.greeting, { color: colors.text.secondary }]}>
-                        Olá, {aluno?.name?.split(' ')[0] || 'Aluno'}! 💪
+                        Olá, {aluno?.name?.split(' ')[0] || 'Aluno'}! 
                     </Text>
                     <Text style={[styles.headerTitle, { color: colors.text.primary }]}>
                         {WEEK_DAYS[dayOfWeek]?.full || 'Hoje'}

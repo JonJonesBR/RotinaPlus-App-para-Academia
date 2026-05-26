@@ -1,8 +1,8 @@
 # Contribuindo para o RotinaPlus
 
-Obrigado pelo interesse em contribuir com o RotinaPlus! 🎉
+Obrigado pelo interesse em contribuir com o RotinaPlus! 
 
-## 🚀 Como Contribuir
+##  Como Contribuir
 
 ### 1. Fork e Clone
 
@@ -72,7 +72,7 @@ git commit -m "Add: tela de histórico de treinos"
 
 ---
 
-## 📝 Padrões de Código
+##  Padrões de Código
 
 ### JavaScript/React Native
 
@@ -102,7 +102,7 @@ src/
 
 ---
 
-## 🐛 Reportando Bugs
+##  Reportando Bugs
 
 1. Verifique se o bug já foi reportado nas [Issues](https://github.com/JonJonesBR/RotinaPlus-App-para-Academia/issues)
 2. Se não, crie uma nova issue com:
@@ -114,7 +114,7 @@ src/
 
 ---
 
-## 💡 Sugerindo Features
+##  Sugerindo Features
 
 Adoramos novas ideias! Abra uma issue com:
 
@@ -124,7 +124,7 @@ Adoramos novas ideias! Abra uma issue com:
 
 ---
 
-## 📜 Código de Conduta
+##  Código de Conduta
 
 - Seja respeitoso
 - Aceite críticas construtivas
@@ -137,4 +137,4 @@ Adoramos novas ideias! Abra uma issue com:
 
 Abra uma issue com a tag `question` ou entre em contato via GitHub.
 
-Obrigado por contribuir! 🙏
+Obrigado por contribuir! 

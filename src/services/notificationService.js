@@ -81,7 +81,7 @@ export const NotificationService = {
         try {
             const notificationId = await Notifications.scheduleNotificationAsync({
                 content: {
-                    title: '🏋️ Hora do Treino!',
+                    title: ' Hora do Treino!',
                     body: `Seu treino "${workout.name}" está te esperando!`,
                     data: { workoutId: workout.id, type: 'workout_reminder' },
                     sound: true,
@@ -121,7 +121,7 @@ export const NotificationService = {
 
             const notificationId = await Notifications.scheduleNotificationAsync({
                 content: {
-                    title: '💰 Lembrete de Pagamento',
+                    title: ' Lembrete de Pagamento',
                     body: `Sua mensalidade de R$ ${payment.amount.toFixed(2)} vence em 3 dias!`,
                     data: { paymentId: payment.id, type: 'payment_reminder' },
                     sound: true,
@@ -156,7 +156,7 @@ export const NotificationService = {
 
             const notificationId = await Notifications.scheduleNotificationAsync({
                 content: {
-                    title: '⚠️ Pagamento Vencendo Hoje',
+                    title: '⚠ Pagamento Vencendo Hoje',
                     body: `Sua mensalidade de R$ ${payment.amount.toFixed(2)} vence hoje!`,
                     data: { paymentId: payment.id, type: 'payment_due' },
                     sound: true,
