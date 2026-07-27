@@ -20,12 +20,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.seudominio.rotinaplus",
       "buildNumber": "0.0.8",
-      "icon": "./assets/icon.png",
-      "splash": {
-        "image": "./assets/splash.png",
-        "resizeMode": "contain",
-        "backgroundColor": "#FFFFFF"
-      }
+      "icon": "./assets/icon.png"
     },
     "android": {
       "adaptiveIcon": {
@@ -33,24 +28,29 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.seudominio.rotinaplus",
-      "versionCode": 4,
-      "splash": {
-        "image": "./assets/splash.png",
-        "resizeMode": "contain",
-        "backgroundColor": "#FFFFFF"
-      }
+      "versionCode": 4
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "newArchEnabled": true,
     "plugins": [
-      "expo-secure-store"
-    ],
-    "notification": {
-      "icon": "./assets/notification-icon.png",
-      "color": "#FFFFFF",
-      "androidMode": "default"
-    }
+      "expo-secure-store",
+      "expo-status-bar",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#FFFFFF"
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#FFFFFF"
+        }
+      ]
+    ]
   }
 }
