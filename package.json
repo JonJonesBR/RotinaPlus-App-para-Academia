@@ -58,7 +58,13 @@
   "license": "MIT",
   "private": true,
   "overrides": {
-    "image-size": "^1.2.1"
+    "image-size": "^1.2.1",
+    "metro": {
+      "ws": "^7.5.11"
+    },
+    "react-devtools-core": {
+      "ws": "^7.5.11"
+    }
   },
   "expo": {
     "doctor": {
